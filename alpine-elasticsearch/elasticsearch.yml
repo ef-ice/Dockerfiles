@@ -1,0 +1,7 @@
+cluster:
+  name: elasticsearch
+
+path:
+  data: -ELASTICSEARCH_DATA-
+  logs: -ELASTICSEARCH_LOG-
+  plugins: /elasticsearch/plugins
