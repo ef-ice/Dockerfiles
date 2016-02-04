@@ -1,7 +1,19 @@
+# listen on all interfaces
+network:
+  bind_host: 0.0.0.0
+
+# default ports (http 9200, tcp 9300)
+http:
+  port: 9200
+
+transport:
+  tcp:
+    port: 9300
+
 cluster:
   name: elasticsearch
 
 path:
-  data: -ELASTICSEARCH_DATA-
-  logs: -ELASTICSEARCH_LOG-
+  data: /var/services/data/elasticsearch/
+  logs: /var/services/log/
   plugins: /elasticsearch/plugins
