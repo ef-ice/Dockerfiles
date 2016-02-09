@@ -5,12 +5,13 @@ ENV ES_VERSION 2.2.0
 # Install
 RUN apk update && apk upgrade
 RUN apk add --update curl
-RUN curl -L -O https://download.elastic.co/elasticsearch/release/org/elasticsearch/distribution/tar/elasticsearch/$ES_VERSION/elasticsearch-$ES_VERSION.tar.gz
-RUN tar -zxvf elasticsearch-$ES_VERSION.tar.gz && rm elasticsearch-$ES_VERSION.tar.gz
-RUN mv /elasticsearch-$ES_VERSION /elasticsearch
+RUN curl -L -O https://download.elasticsearch.org/elasticsearch/release/org/elasticsearch/distribution/tar/elasticsearch/$ES_VERSION/elasticsearch-$ES_VERSION.tar.gz \
+    && tar -zxvf elasticsearch-$ES_VERSION.tar.gz \
+    && rm elasticsearch-$ES_VERSION.tar.gz \
+    && mv /elasticsearch-$ES_VERSION /elasticsearch \
+    && rm $(find /elasticsearch | egrep "\.(exe|bat)")
 
 # Clean up
-RUN rm $(find /elasticsearch | egrep "\.(exe|bat)")
 RUN apk del curl && rm -rfv /var/cache/apk/* /tmp/* /var/tmp/*
 
 # Copy
