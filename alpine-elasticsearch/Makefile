@@ -1,4 +1,11 @@
 default: build
 
+NAME=alpine-elasticsearch
+REGISTRY=quay.io/vnadgir_ef/
+
 build:
-	docker build -t docker-registry-container.efset.org/efset/elasticsearch .
+	docker build -t $(NAME) .
+
+push:
+	docker tag $(NAME) $(REGISTRY)$(NAME)
+	docker push $(REGISTRY)$(NAME)

@@ -1,13 +1,25 @@
 default: build
 
-build: javabase elasticsearch solr
+build: build-javabase build-elasticsearch build-solr
 	echo "Done."
 
-javabase:
+push: push-javabase push-elasticsearch push-solr
+
+build-javabase:
 	cd ./alpine-javabase && make && cd -
 
-elasticsearch:
+push-javabase:
+	cd ./alpine-javabase && make push && cd -
+
+build-elasticsearch:
 	cd ./alpine-elasticsearch && make && cd -
 
-solr:
+push-elasticsearch:
+	cd ./alpine-elasticsearch && make push && cd -
+
+build-solr:
 	cd ./alpine-solr && make && cd -
+
+push-solr:
+	cd ./alpine-solr && make push && cd -
+
