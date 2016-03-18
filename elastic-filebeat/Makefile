@@ -1,6 +1,6 @@
 default: build
 
-NAME=alpine-filebeat
+NAME=elastic-filebeat
 REGISTRY=quay.io/vnadgir_ef/
 
 build:
