@@ -18,7 +18,8 @@ RUN  tar xzf /tmp/$LOGSTASH_PKG.tar.gz -C /opt/ && \
 
 # Copy
 ADD *.conf /opt/logstash-1.5.3/config/
+ADD docker-cmd.sh /opt/docker-cmd.sh
 
 EXPOSE 5000
 
-CMD ["/opt/logstash-1.5.3/bin/logstash", "agent", "--debug", "-f", "/opt/logstash-1.5.3/config/akamai_logstash.conf"]
+ENTRYPOINT ["/opt/docker-cmd.sh"]
