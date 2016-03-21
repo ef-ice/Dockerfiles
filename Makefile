@@ -1,9 +1,14 @@
 default: build
 
-build: build-javabase build-elasticsearch build-solr
-	echo "Done."
+build: build-filebeat build-javabase build-elasticsearch build-solr
 
-push: push-javabase push-elasticsearch push-solr
+push: push-filebeat push-javabase push-elasticsearch push-solr
+
+build-filebeat:
+	cd ./elastic-filebeat && make && cd -
+
+push-filebeat:
+	cd ./elastic-filebeat && make push && cd -
 
 build-javabase:
 	cd ./alpine-javabase && make && cd -
