@@ -10,10 +10,10 @@ rule_files:
 
 scrape_configs:
   - job_name: 'prometheus'
-    scrape_interval: 30s
+    scrape_interval: 60s
     target_groups:
       - targets: ['localhost:9090']
 
   - job_name: 'cadvisor'
     file_sd_configs:
-      - names: ['/etc/prometheus/tgroups.json']
+      - names: ['/etc/cadvisor/cadvisor.json']
