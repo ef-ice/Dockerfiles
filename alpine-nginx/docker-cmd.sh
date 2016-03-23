@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 set -o nounset
 
 echo "Starting nginx service.."
@@ -18,9 +18,21 @@ if [ -z "$VULCAND_SERVERS" ]; then
    exit 1
 fi
 
-echo "$(bash servers.sh $VULCAND_SERVERS)"
+function parseServers() {
+  local servers=(${1//,/ })
 
-sed -i "s~VULCAND_SERVERS~$(servers.sh $VULCAND_SERVERS)~g" nginx.conf
+  local result=""
+
+  for i in "${!servers[@]}"; do
+    result=$(printf "%s server %s;" "$result" "${servers[i]}")
+  done
+
+  echo "$result"
+}
+
+READY_SERVERS=$(parseServers $VULCAND_SERVERS)
+echo $READY_SERVERS
+sed -i "s/VULCAND_SERVERS/$READY_SERVERS/g" nginx.conf
 
 htpasswd -b -c /etc/nginx/.htpasswd $USERNAME $PASSWORD
 

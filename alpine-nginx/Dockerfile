@@ -1,5 +1,7 @@
 FROM alpine:latest
 
+RUN sed -i 's~dl-cdn~dl-4~g' /etc/apk/repositories
+
 # Install Nginx.
 RUN apk update && apk upgrade && \
 apk add --update bash nginx apache2-utils && \
@@ -15,7 +17,6 @@ WORKDIR /etc/nginx
 
 RUN mkdir /usr/share/nginx/logs
 
-COPY servers.sh servers.sh
 COPY docker-cmd.sh docker-cmd.sh
 COPY nginx.conf nginx.conf
 
