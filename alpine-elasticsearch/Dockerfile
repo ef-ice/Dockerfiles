@@ -28,4 +28,4 @@ EXPOSE 9200 9300
 
 USER 1000
 
-CMD ["/elasticsearch/bin/elasticsearch", "-Des.logger.level=$ELASTICSEARCH_LOG_LEVEL"]
+ENTRYPOINT ["/elasticsearch/bin/elasticsearch", "-Des.logger.level=$ELASTICSEARCH_LOG_LEVEL"]
