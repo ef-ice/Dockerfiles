@@ -9,21 +9,20 @@ ENV LOGSTASH_URL=https://download.elastic.co/logstash/logstash/logstash-1.5.3.ta
 
 # Install
 RUN apk update && \
-  apk upgrade && \
-  apk add --update curl && \
-  curl -o /tmp/$LOGSTASH_PKG.tar.gz $LOGSTASH_URL
-
-RUN  tar xzf /tmp/$LOGSTASH_PKG.tar.gz -C /opt/ && \
-  rm /tmp/$LOGSTASH_PKG.tar.gz && \
-  rm $(find /opt/$LOGSTASH_PKG | egrep "\.(exe|bat)") && \
-  apk del curl && rm -rfv /var/cache/apk/* /tmp/* /var/tmp/* && \
-  chmod 775 /opt/logstash-1.5.3 && chmod 775 /opt/logstash-1.5.3/* && \
-  mkdir -p $LOGSTASH_DATA && \
-  mkdir -p $LOGSTASH_LOG
+apk upgrade && \
+apk add --update curl && \
+curl -o /tmp/$LOGSTASH_PKG.tar.gz $LOGSTASH_URL && \
+tar xzf /tmp/$LOGSTASH_PKG.tar.gz -C /opt/ && \
+rm /tmp/$LOGSTASH_PKG.tar.gz && \
+rm $(find /opt/$LOGSTASH_PKG | egrep "\.(exe|bat)") && \
+apk del curl && rm -rfv /var/cache/apk/* /tmp/* /var/tmp/* && \
+chmod 775 /opt/logstash-1.5.3 && chmod 775 /opt/logstash-1.5.3/* && \
+mkdir -p $LOGSTASH_DATA && \
+mkdir -p $LOGSTASH_LOG
 
 # Copy
-ADD *.conf /opt/logstash-1.5.3/config/
-ADD docker-cmd.sh /opt/docker-cmd.sh
+COPY *.conf /opt/logstash-1.5.3/config/
+COPY docker-cmd.sh /opt/docker-cmd.sh
 
 EXPOSE 5000
 
