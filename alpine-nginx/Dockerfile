@@ -1,5 +1,6 @@
 FROM alpine:latest
 
+# TODO can be removed later I think
 RUN sed -i 's~dl-cdn~dl-4~g' /etc/apk/repositories
 
 # Install Nginx.
