@@ -22,8 +22,8 @@ RUN  tar xzf /tmp/$LOGSTASH_PKG.tar.gz -C /opt/ && \
   mkdir -p $LOGSTASH_LOG
 
 # Copy
-ADD *.conf /opt/logstash-1.5.3/config/
-ADD docker-cmd.sh /opt/docker-cmd.sh
+COPY *.conf /opt/logstash-1.5.3/config/
+COPY docker-cmd.sh /opt/docker-cmd.sh
 
 EXPOSE 5000
 
