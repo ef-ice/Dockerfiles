@@ -1,12 +1,15 @@
 FROM oberthur/docker-alpine-java
 
-ENV ES_VERSION=2.2.0 ELASTICSEARCH_DATA=/var/services/data/elasticsearch/ ELASTICSEARCH_LOG=/var/services/log/ ELASTICSEARCH_LOG_LEVEL=INFO
+ENV ES_VERSION=1.7.3
+ENV ELASTICSEARCH_DATA=/var/services/data/elasticsearch/
+ENV ELASTICSEARCH_LOG=/var/services/log/
+ENV ELASTICSEARCH_LOG_LEVEL=INFO
 
 # Install
 RUN apk update && \
   apk upgrade && \
   apk add --update curl && \
-  curl -L -O https://download.elasticsearch.org/elasticsearch/release/org/elasticsearch/distribution/tar/elasticsearch/$ES_VERSION/elasticsearch-$ES_VERSION.tar.gz && \
+  curl -L -O https://download.elastic.co/elasticsearch/elasticsearch/elasticsearch-$ES_VERSION.tar.gz && \
   tar xzf elasticsearch-$ES_VERSION.tar.gz && \
   rm elasticsearch-$ES_VERSION.tar.gz && \
   mv /elasticsearch-$ES_VERSION /elasticsearch && \
@@ -19,7 +22,7 @@ RUN apk update && \
   chown -R 1000 /elasticsearch $ELASTICSEARCH_DATA $ELASTICSEARCH_LOG
 
 # Copy
-ADD elasticsearch.yml /elasticsearch/config/
+COPY elasticsearch.yml /elasticsearch/config/
 
 EXPOSE 9200 9300
 

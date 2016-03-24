@@ -1,6 +1,11 @@
 FROM oberthur/docker-alpine-java
 
-ENV LOGSTASH_VERSION=1.5.3 LOGSTASH_PKG=logstash-1.5.3 LOGSTASH_DATA=/var/services/data/logstash/ LOGSTASH_LOG=/var/services/log/ LOGSTASH_LOG_LEVEL=INFO LOGSTASH_URL=https://download.elastic.co/logstash/logstash/logstash-1.5.3.tar.gz
+ENV LOGSTASH_VERSION=1.5.3
+ENV LOGSTASH_PKG=logstash-1.5.3
+ENV LOGSTASH_DATA=/var/services/data/logstash/
+ENV LOGSTASH_LOG=/var/services/log/
+ENV LOGSTASH_LOG_LEVEL=INFO
+ENV LOGSTASH_URL=https://download.elastic.co/logstash/logstash/logstash-1.5.3.tar.gz
 
 # Install
 RUN apk update && \
