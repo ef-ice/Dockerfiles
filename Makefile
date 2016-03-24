@@ -1,8 +1,8 @@
 default: build
 
-build: build-elasticsearch build-javabase build-logstash build-nginx build-solr build-filebeat
+build: build-elasticsearch build-javabase build-logstash build-nginx build-filebeat
 
-push: push-elasticsearch push-javabase push-logstash push-nginx push-solr push-filebeat
+push: push-elasticsearch push-javabase push-logstash push-nginx push-filebeat
 
 # elasticsearch
 build-elasticsearch:
@@ -31,13 +31,6 @@ build-nginx:
 
 push-nginx:
 	cd ./alpine-nginx && make push && cd -
-
-# solr
-build-solr:
-	cd ./alpine-solr && make && cd -
-
-push-solr:
-	cd ./alpine-solr && make push && cd -
 
 # filebeat
 build-filebeat:
