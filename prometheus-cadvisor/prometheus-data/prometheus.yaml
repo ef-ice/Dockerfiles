@@ -1,0 +1,19 @@
+# my global config
+global:
+  scrape_interval:     15s # By default, scrape targets every 15 seconds.
+  evaluation_interval: 15s # By default, scrape targets every 15 seconds.
+
+  external_labels:
+    monitor: 'codelab-monitor'
+
+rule_files:
+
+scrape_configs:
+  - job_name: 'prometheus'
+    scrape_interval: 60s
+    target_groups:
+      - targets: ['localhost:9090']
+
+  - job_name: 'cadvisor'
+    file_sd_configs:
+      - names: ['/etc/cadvisor/cadvisor.json']
