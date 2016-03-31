@@ -15,6 +15,6 @@ fi
 sed -i "s~FILE_PATH~$FILE_PATH~g" /opt/logstash/config/logstash.conf
 sed -i "s~ELASTICSEARCH_NODES~$ELASTICSEARCH_NODES~g" /opt/logstash/config/logstash.conf
 
-cat "$LOGSTASH_CONFIG"
+cat /opt/logstash/config/logstash.conf
 
 /opt/logstash/bin/logstash agent -f /opt/logstash/config/logstash.conf

@@ -17,15 +17,17 @@ tar xzf logstash-$LOGSTASH_VERSION.tar.gz && \
 rm logstash-$LOGSTASH_VERSION.tar.gz && \
 mv logstash-$LOGSTASH_VERSION logstash && \
 rm $(find /opt/logstash | egrep "\.(exe|bat)") && \
-apk del curl && rm -rfv /var/cache/apk/* /tmp/* /var/tmp/* && \
-chmod 775 /opt/logstash && chmod 775 /opt/logstash/* && \
-mkdir -p $LOGSTASH_DATA && \
-mkdir -p $LOGSTASH_LOG
+apk del curl && rm -rfv /var/cache/apk/* /tmp/* /var/tmp/*
+
+# Prepare
+RUN chmod 775 /opt/logstash && chmod 775 /opt/logstash/*
+RUN mkdir -p $LOGSTASH_DATA
+RUN mkdir -p $LOGSTASH_LOG
 
 # Copy
 COPY *.conf /opt/logstash/config/
 COPY docker-cmd.sh /opt/docker-cmd.sh
 
-EXPOSE 5000
+EXPOSE 8080
 
 CMD ["/opt/docker-cmd.sh"]
