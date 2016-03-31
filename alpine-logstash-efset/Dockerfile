@@ -29,5 +29,6 @@ COPY *.conf /opt/logstash/config/
 COPY docker-cmd.sh /opt/docker-cmd.sh
 
 EXPOSE 8080
+EXPOSE 31311
 
 CMD ["/opt/docker-cmd.sh"]
