@@ -1,2 +1,3 @@
 FROM prom/prometheus
-ADD prometheus-data/prometheus.yml /etc/prometheus/
+VOLUME /opt/prometheus
+ADD prometheus-data/* /etc/prometheus/
