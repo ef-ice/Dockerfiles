@@ -13,19 +13,21 @@ RUN apk update && \
   tar xzf elasticsearch-$ES_VERSION.tar.gz && \
   rm elasticsearch-$ES_VERSION.tar.gz && \
   mv /elasticsearch-$ES_VERSION /elasticsearch && \
-  rm $(find /elasticsearch | egrep "\.(exe|bat)") && \
-  apk del curl && rm -rfv /var/cache/apk/* /tmp/* /var/tmp/* && \
-  chmod 775 /elasticsearch && chmod 775 /elasticsearch/* && \
-  mkdir -p /var/services && chmod 775 /var/services && \
-  mkdir -p $ELASTICSEARCH_DATA && \
-  mkdir -p $ELASTICSEARCH_LOG && \
-  chown -R 1000 /elasticsearch $ELASTICSEARCH_DATA $ELASTICSEARCH_LOG
+  rm $(find /elasticsearch | egrep "\.(exe|bat|txt|textile)") && \
+  apk del curl && rm -rfv /var/cache/apk/* /tmp/* /var/tmp/*
 
-# Copy
+# Copy files
 COPY elasticsearch.yml /elasticsearch/config/
 
+RUN mkdir -p $ELASTICSEARCH_DATA
+RUN mkdir -p $ELASTICSEARCH_LOG
+RUN adduser -D -H -g 1000 1000
+RUN chown -R 1000:1000 /elasticsearch $ELASTICSEARCH_DATA $ELASTICSEARCH_LOG
+
+# Expose ports
 EXPOSE 9200 9300
 
+# Chnage user - mandatory for ES
 USER 1000
 
 ENTRYPOINT ["/elasticsearch/bin/elasticsearch", "-Des.logger.level=$ELASTICSEARCH_LOG_LEVEL"]
