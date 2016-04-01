@@ -1,0 +1,10 @@
+ALERT DiskWillFillIn4Hours
+  IF predict_linear(node_filesystem_free[1h], 4*3600) < 0
+  FOR 5m
+  LABELS {
+    severity="page"
+  }
+  ANNOTATIONS {
+    summary = "Disk will fill in next 4 hours on {{ $labels.instance }}",
+    description = "{{ $labels.instance }} has a disk that will be filled in the next 4 hours if the present rate of growth continues (current value: {{ $value }}%)",
+  }
