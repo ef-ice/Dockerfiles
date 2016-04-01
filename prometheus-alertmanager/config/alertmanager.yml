@@ -1,0 +1,12 @@
+global:
+  slack_api_url: "SLACK_API_URL"
+route:
+  group_wait: 10s
+  group_interval: 10s
+  repeat_interval: 5m
+  receiver: Prometheus_Alertmanager
+receivers:
+  - name: Prometheus_Alertmanager
+    slack_configs:
+      - api_url: 'SLACK_API_URL'
+        channel: 'SLACK_CHANNEL'
