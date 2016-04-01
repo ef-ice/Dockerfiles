@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 if [ -z "$AWS_ACCESS_KEY_ID" ]; then
    echo "Missing AWS_ACCESS_KEY_ID environment variable"
@@ -36,8 +36,7 @@ echo "aws_access_key_id = $AWS_ACCESS_KEY_ID" >> /etc/boto.cfg
 echo "aws_secret_access_key = $AWS_SECRET_ACCESS_KEY" >> /etc/boto.cfg
 
 ## activate virtual environment
-. .venv/bin/activate
-pip install boto
+virtualenv --system-site-packages /.venv && . /.venv/bin/activate
 
 VOLUMES=$(aws ec2 describe-instances \
 --filter "Name=tag:environment-tag,Values=$ENVIRONMENT_TAG" \

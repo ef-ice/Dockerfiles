@@ -1,17 +1,18 @@
 FROM alpine:latest
 
 RUN apk update && apk upgrade && \
-apk add --update py-pip py-virtualenv gcc python-dev build-base bash jq util-linux curl && \
-pip install --upgrade pip && \
-pip install ansible boto awscli && \
+apk add --update curl jq python-dev gcc build-base && \
 rm -rfv /var/cache/apk/* /tmp/* /var/tmp/*
+
+WORKDIR /opt
+
+RUN curl -L -O https://bootstrap.pypa.io/get-pip.py && \
+python get-pip.py && \
+rm get-pip.py && \
+pip install -U ansible boto awscli virtualenv
 
 RUN echo "[localhost]" > ~/.ansible_hosts
 RUN echo '127.0.0.1 ansible_python_interpreter=$VIRTUAL_ENV/bin/python' >> ~/.ansible_hosts
-
-RUN mkdir .venv && \
-virtualenv .venv && \
-. .venv/bin/activate
 
 COPY roles/ /opt/roles
 COPY docker-cmd.sh /opt/
