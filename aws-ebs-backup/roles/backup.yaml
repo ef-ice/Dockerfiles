@@ -1,0 +1,12 @@
+- hosts: localhost
+  connection: local
+
+  tasks:
+    - name: Backup all /dev/xvdf volumes
+      ec2_snapshot:
+        aws_access_key: "{{ aws_access_key_id }}"
+        aws_secret_key: "{{ aws_secret_access_key }}"
+        region: "{{ region }}"
+        volume_id: "{{ item }}"
+        description: CoreOS snapshot of {{ item }} taken {{ ansible_date_time.iso8601 }}
+      with_items: "{{ volumes }}"
