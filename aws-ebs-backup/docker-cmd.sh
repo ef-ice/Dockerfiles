@@ -46,7 +46,7 @@ VOLUMES=$(aws ec2 describe-instances \
 VOLUMES=`echo $VOLUMES`
 echo "Volumes: $VOLUMES"
 
-ansible-playbook -vvv -i ~/.ansible_hosts /opt/roles/backup.yaml \
+ansible-playbook -vvv -i ~/.ansible_hosts /opt/roles/backup.yml \
   --extra-vars "$VOLUMES" \
   --extra-vars " \
   aws_access_key_id=$AWS_ACCESS_KEY_ID \
