@@ -3,7 +3,6 @@ FROM oberthur/docker-alpine-java
 ENV ES_VERSION=1.7.3
 ENV ELASTICSEARCH_DATA=/var/services/data/elasticsearch/
 ENV ELASTICSEARCH_LOG=/var/services/log/
-ENV ELASTICSEARCH_LOG_LEVEL=INFO
 
 # Install
 RUN apk update && \
@@ -30,4 +29,6 @@ EXPOSE 9200 9300
 # Chnage user - mandatory for ES
 USER 1000
 
-ENTRYPOINT ["/elasticsearch/bin/elasticsearch", "-Des.logger.level=$ELASTICSEARCH_LOG_LEVEL"]
+RUN /elasticsearch/bin/plugin install elasticsearch/elasticsearch-cloud-aws/2.7.1
+
+ENTRYPOINT ["/elasticsearch/bin/elasticsearch"]

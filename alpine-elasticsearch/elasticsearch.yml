@@ -2,7 +2,6 @@
 network:
   bind_host: 0.0.0.0
 
-# default ports (http 9200, tcp 9300)
 http:
   port: 9200
 
@@ -17,3 +16,11 @@ path:
   data: /var/services/data/elasticsearch/
   logs: /var/services/log/
   plugins: /elasticsearch/plugins
+
+cloud:
+  aws:
+    protocol: http
+  s3:
+    protocol: http
+  ec2:
+    protocol: http
