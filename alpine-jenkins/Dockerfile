@@ -4,7 +4,7 @@ FROM quay.io/vnadgir_ef/alpine-javabase
 
 # Install linux libs
 RUN apk update && apk upgrade && \
-apk add curl jq make git && \
+apk add curl jq make git sudo && \
 rm -rfv /var/cache/apk/* /tmp/* /var/tmp/*
 
 ENV JENKINS_VERSION=1.656
@@ -30,11 +30,22 @@ echo "https://updates.jenkins-ci.org/latest/${plugin}.hpi" ;\
 curl -SL https://updates.jenkins-ci.org/latest/${plugin}.hpi --output $JENKINS_PLUGINS/${plugin}.hpi; \
 done
 
-EXPOSE 8080 50000
+# Docker stuff
+RUN echo "jenkins ALL=NOPASSWD: /bin/docker.io" >> /etc/sudoers
+COPY docker.sh /usr/bin/docker
+RUN chmod +x /usr/bin/docker
+
+# For web UI
+EXPOSE 8080
+
+# For slave agents
+EXPOSE 50000
 
 COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
 
 USER ${JENKINS_USER}
+
+VOLUME ["${JENKINS_HOME}"]
 
 ENTRYPOINT ["docker-entrypoint.sh"]
 CMD [""]
