@@ -25,10 +25,10 @@ chown -R ${JENKINS_USER}:${JENKINS_GROUP} ${JENKINS_HOME} && \
 chown -R ${JENKINS_USER}:${JENKINS_GROUP} ${JENKINS_WAR}
 
 # Install jenkins plugins
-RUN for plugin in scm-sync-configuration scm-api git-client git greenballs; do \
-echo "https://updates.jenkins-ci.org/latest/${plugin}.hpi" ;\
-curl -SL https://updates.jenkins-ci.org/latest/${plugin}.hpi --output $JENKINS_PLUGINS/${plugin}.hpi; \
-done
+# RUN for plugin in scm-sync-configuration scm-api git-client git greenballs; do \
+# echo "https://updates.jenkins-ci.org/latest/${plugin}.hpi" ;\
+# curl -SL https://updates.jenkins-ci.org/latest/${plugin}.hpi --output $JENKINS_PLUGINS/${plugin}.hpi; \
+# done
 
 # Docker stuff
 RUN echo "jenkins ALL=NOPASSWD: /bin/docker.io" >> /etc/sudoers
