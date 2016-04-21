@@ -12,10 +12,10 @@ ENV JENKINS_USER jenkins
 ENV JENKINS_GROUP jenkins
 ENV JENKINS_HOME /opt/jenkins
 ENV JENKINS_WAR /opt/jenkins.war
-ENV JENKINS_PLUGINS $JENKINS_HOME/plugins
+# ENV JENKINS_PLUGINS $JENKINS_HOME/plugins
 
 # Install jenkins
-RUN mkdir -p $JENKINS_HOME $JENKINS_PLUGINS && \
+RUN mkdir -p $JENKINS_HOME && \
 curl -SL https://updates.jenkins-ci.org/download/war/$JENKINS_VERSION/jenkins.war --output ${JENKINS_WAR}
 
 # Setup jenkins user
@@ -45,7 +45,7 @@ COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
 
 USER ${JENKINS_USER}
 
-VOLUME ["${JENKINS_HOME}"]
+# TODO VOLUME ["/opt/jenkins"]
 
 ENTRYPOINT ["docker-entrypoint.sh"]
 CMD [""]
