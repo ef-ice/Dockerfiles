@@ -26,7 +26,9 @@ chown -R ${JENKINS_USER}:${JENKINS_GROUP} ${JENKINS_WAR}
 
 # Install jenkins plugins
 RUN for plugin in scm-sync-configuration scm-api git-client git greenballs; do \
-curl -sSL https://updates.jenkins-ci.org/latest/${plugin}.hpi --output $JENKINS_PLUGINS/${plugin}.hpi; done
+echo "https://updates.jenkins-ci.org/latest/${plugin}.hpi" ;\
+curl -SL https://updates.jenkins-ci.org/latest/${plugin}.hpi --output $JENKINS_PLUGINS/${plugin}.hpi; \
+done
 
 EXPOSE 8080 50000
 
