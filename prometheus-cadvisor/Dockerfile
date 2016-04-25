@@ -1,3 +1,3 @@
 FROM prom/prometheus
-VOLUME /opt/prometheus
+RUN mkdir -p /opt/prometheus
 ADD config/ /etc/prometheus/
