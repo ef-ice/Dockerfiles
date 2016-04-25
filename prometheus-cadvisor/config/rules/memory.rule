@@ -2,6 +2,9 @@
 ALERT NodeHighMemoryUsage
   IF (node_memory_MemAvailable or (node_memory_MemFree + node_memory_Buffers + node_memory_Cached)) / node_memory_MemTotal < 0.1
   FOR 5m
+  LABELS {
+    severity="page"
+  }
   ANNOTATIONS {
     summary = "High Memory Usage on {{ $labels.instance }}",
     description = "{{ $labels.instance }} has a Memory Usage over 5 minutes (current value: {{ $value }}%)",
