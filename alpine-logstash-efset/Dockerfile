@@ -28,7 +28,13 @@ RUN mkdir -p $LOGSTASH_LOG
 COPY *.conf /opt/logstash/config/
 COPY docker-cmd.sh /opt/docker-cmd.sh
 
+# HTTP port
 EXPOSE 8080
+
+# Filebeat port
+EXPOSE 5044
+
+# Akamai port
 EXPOSE 31311
 
 CMD ["/opt/docker-cmd.sh"]
