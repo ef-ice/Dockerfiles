@@ -1,6 +1,6 @@
 FROM oberthur/docker-alpine-java
 
-ENV LOGSTASH_VERSION=1.5.3
+ENV LOGSTASH_VERSION=1.5.4
 ENV LOGSTASH_DATA=/var/services/data/logstash/
 ENV LOGSTASH_LOG=/var/services/log/
 ENV LOGSTASH_LOG_LEVEL=INFO
@@ -9,9 +9,8 @@ ENV LOGSTASH_URL=https://download.elastic.co/logstash/logstash/logstash-$LOGSTAS
 WORKDIR /opt
 
 # Install
-RUN apk update && \
-apk upgrade && \
-apk add --update curl && \
+RUN apk update && apk upgrade && \
+apk add --update curl bash && \
 curl -L -O https://download.elastic.co/logstash/logstash/logstash-$LOGSTASH_VERSION.tar.gz && \
 tar xzf logstash-$LOGSTASH_VERSION.tar.gz && \
 rm logstash-$LOGSTASH_VERSION.tar.gz && \
@@ -26,15 +25,15 @@ RUN mkdir -p $LOGSTASH_LOG
 
 # Copy
 COPY *.conf /opt/logstash/config/
-COPY docker-cmd.sh /opt/docker-cmd.sh
+COPY docker-entrypoint.sh /opt/docker-entrypoint.sh
 
-# HTTP port
-EXPOSE 8080
+RUN /opt/logstash/bin/plugin install logstash-input-beats
 
 # Filebeat port
 EXPOSE 5044
 
-# Akamai port
+# HTTP port
 EXPOSE 31311
 
-CMD ["/opt/docker-cmd.sh"]
+ENTRYPOINT ["/opt/docker-entrypoint.sh"]
+CMD []
