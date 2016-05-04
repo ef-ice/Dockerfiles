@@ -14,13 +14,13 @@ if [ -z "$FILEBEAT_FILEPATH" ]; then
    exit 1
 fi
 
-if [ -z "$ELASTICSEARCH_NODES" ]; then
-   echo "Missing ELASTICSEARCH_NODES, e.g. [\"172.24.40.1:9200\",\"172.24.40.2:9200\"]"
+if [ -z "$LOGSTASH_NODES" ]; then
+   echo "Missing LOGSTASH_NODES, e.g. [\"172.24.40.1:5044\",\"172.24.40.2:5044\"]"
    exit 1
 fi
 
 sed -i "s~FILEBEAT_FILEPATH~$FILEBEAT_FILEPATH~g" filebeat.conf
-sed -i "s~ELASTICSEARCH_NODES~$ELASTICSEARCH_NODES~g" filebeat.conf
+sed -i "s~LOGSTASH_NODES~$LOGSTASH_NODES~g" filebeat.conf
 
 cat "$FILEBEAT_CONFIG"
 

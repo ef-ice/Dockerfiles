@@ -1,0 +1,13 @@
+{
+    "Changes": [{
+        "Action": "UPSERT",
+        "ResourceRecordSet": {
+            "Name": "RESOURCE_NAME",
+            "Type": "A",
+            "TTL": 300,
+            "ResourceRecords": [{
+                "Value": "RESOURCE_IP"
+            }]
+        }
+    }]
+}

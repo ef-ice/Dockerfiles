@@ -1,6 +1,6 @@
-#!/bin/sh
+#!/bin/bash
 
-echo "Starting logstash service.."
+set -eo pipefail
 
 if [ -z "$FILE_PATH" ]; then
    echo "Missing FILE_PATH, e.g. /var/log/journald.log"
@@ -17,4 +17,9 @@ sed -i "s~ELASTICSEARCH_NODES~$ELASTICSEARCH_NODES~g" /opt/logstash/config/logst
 
 cat /opt/logstash/config/logstash.conf
 
-/opt/logstash/bin/logstash agent -f /opt/logstash/config/logstash.conf
+# If there are any arguments then we want to run those instead
+if [[ "$1" == "-"* || -z $1 ]]; then
+  exec /opt/logstash/bin/logstash agent -f /opt/logstash/config/logstash.conf "$@"
+else
+  exec "$@"
+fi
