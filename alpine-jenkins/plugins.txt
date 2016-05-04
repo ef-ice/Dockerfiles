@@ -1,0 +1,8 @@
+scm-sync-configuration
+scm-api
+git-client
+git
+greenballs
+github
+ec2
+selenium

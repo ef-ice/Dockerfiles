@@ -10,11 +10,15 @@ rm -rfv /var/cache/apk/* /tmp/* /var/tmp/*
 ENV JENKINS_VERSION=1.656
 ENV JENKINS_USER jenkins
 ENV JENKINS_GROUP jenkins
+ENV JENKINS_INSTALL_DIR /opt/install/jenkins
 ENV JENKINS_HOME /opt/jenkins
-ENV JENKINS_WAR /opt/jenkins.war
-# ENV JENKINS_PLUGINS $JENKINS_HOME/plugins
+ENV JENKINS_WAR ${JENKINS_INSTALL_DIR}/jenkins.war
+ENV JENKINS_PLUGINS $JENKINS_INSTALL_DIR/plugins
 
 # Install jenkins
+RUN mkdir -p $JENKINS_INSTALL_DIR && mkdir -p $JENKINS_PLUGINS
+
+
 RUN mkdir -p $JENKINS_HOME && \
 curl -SL https://updates.jenkins-ci.org/download/war/$JENKINS_VERSION/jenkins.war --output ${JENKINS_WAR}
 
@@ -25,10 +29,14 @@ chown -R ${JENKINS_USER}:${JENKINS_GROUP} ${JENKINS_HOME} && \
 chown -R ${JENKINS_USER}:${JENKINS_GROUP} ${JENKINS_WAR}
 
 # Install jenkins plugins
-# RUN for plugin in scm-sync-configuration scm-api git-client git greenballs; do \
-# echo "https://updates.jenkins-ci.org/latest/${plugin}.hpi" ;\
-# curl -SL https://updates.jenkins-ci.org/latest/${plugin}.hpi --output $JENKINS_PLUGINS/${plugin}.hpi; \
-# done
+COPY plugins.txt $JENKINS_INSTALL_DIR
+RUN for plugin in `cat $JENKINS_INSTALL_DIR/plugins.txt`; do \
+  echo "https://updates.jenkins-ci.org/latest/${plugin}.hpi" ;\
+  curl -SL https://updates.jenkins-ci.org/latest/${plugin}.hpi --output $JENKINS_PLUGINS/${plugin}.hpi; \
+  done;
+
+
+RUN sudo chown -R jenkins:jenkins ${JENKINS_INSTALL_DIR}
 
 # Docker stuff
 RUN echo "jenkins ALL=NOPASSWD: /bin/docker.io" >> /etc/sudoers
