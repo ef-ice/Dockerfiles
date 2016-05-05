@@ -2,7 +2,7 @@
 
 set -eo pipefail
 
-ln -s ${JENKINS_PLUGINS} ${JENKINS_HOME}
+ln -sf ${JENKINS_PLUGINS} ${JENKINS_HOME}
 
 # If there are any arguments then we want to run those instead
 if [[ "$1" == "-"* || -z $1 ]]; then
