@@ -36,8 +36,6 @@ RUN for plugin in `cat $JENKINS_INSTALL_DIR/plugins.txt`; do \
 
 RUN sudo chown -R jenkins:jenkins ${JENKINS_INSTALL_DIR}
 
-RUN ln -s ${JENKINS_PLUGINS} ${JENKINS_HOME}
-
 # Docker stuff
 RUN echo "jenkins ALL=NOPASSWD: /bin/docker.io" >> /etc/sudoers
 COPY docker.sh /usr/bin/docker
