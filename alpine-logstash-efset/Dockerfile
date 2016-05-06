@@ -18,6 +18,11 @@ mv logstash-$LOGSTASH_VERSION logstash && \
 rm $(find /opt/logstash | egrep "\.(exe|bat)") && \
 apk del curl && rm -rfv /var/cache/apk/* /tmp/* /var/tmp/*
 
+# Install plugins
+RUN /opt/logstash/bin/plugin install logstash-input-beats logstash-input-http
+RUN /opt/logstash/bin/plugin install logstash-filter-grok logstash-filter-json
+RUN /opt/logstash/bin/plugin install logstash-output-elasticsearch
+
 # Prepare
 RUN chmod 775 /opt/logstash && chmod 775 /opt/logstash/*
 RUN mkdir -p $LOGSTASH_DATA
@@ -26,8 +31,6 @@ RUN mkdir -p $LOGSTASH_LOG
 # Copy
 COPY *.conf /opt/logstash/config/
 COPY docker-entrypoint.sh /opt/docker-entrypoint.sh
-
-RUN /opt/logstash/bin/plugin install logstash-input-beats
 
 # Filebeat port
 EXPOSE 5044
