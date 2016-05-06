@@ -4,7 +4,7 @@
         "ResourceRecordSet": {
             "Name": "RESOURCE_NAME",
             "Type": "A",
-            "TTL": 300,
+            "TTL": 60,
             "ResourceRecords": [{
                 "Value": "RESOURCE_IP"
             }]
