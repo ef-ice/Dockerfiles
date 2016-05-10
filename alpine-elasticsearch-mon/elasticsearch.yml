@@ -1,0 +1,26 @@
+# listen on all interfaces
+network:
+  bind_host: 0.0.0.0
+
+http:
+  port: 9200
+
+transport:
+  tcp:
+    port: 9300
+
+cluster:
+  name: elasticsearch
+
+path:
+  data: /var/services/data/elasticsearch/
+  logs: /var/services/log/
+  plugins: /elasticsearch/plugins
+
+cloud:
+  aws:
+    protocol: http
+  s3:
+    protocol: http
+  ec2:
+    protocol: http
