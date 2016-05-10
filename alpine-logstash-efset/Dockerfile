@@ -1,6 +1,6 @@
 FROM oberthur/docker-alpine-java
 
-ENV LOGSTASH_VERSION=1.5.4
+ENV LOGSTASH_VERSION=2.3.2
 ENV LOGSTASH_DATA=/var/services/data/logstash/
 ENV LOGSTASH_LOG=/var/services/log/
 ENV LOGSTASH_LOG_LEVEL=INFO
@@ -20,7 +20,7 @@ apk del curl && rm -rfv /var/cache/apk/* /tmp/* /var/tmp/*
 
 # Install plugins
 RUN /opt/logstash/bin/plugin install logstash-input-beats logstash-input-http
-RUN /opt/logstash/bin/plugin install logstash-filter-grok logstash-filter-json
+# RUN /opt/logstash/bin/plugin install logstash-filter-grok logstash-filter-json
 RUN /opt/logstash/bin/plugin install logstash-output-elasticsearch
 
 # Prepare
