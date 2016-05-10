@@ -1,6 +1,6 @@
 FROM oberthur/docker-alpine-java
 
-ENV ES_VERSION=1.7.3
+ENV ES_VERSION=2.3.2
 ENV ELASTICSEARCH_DATA=/var/services/data/elasticsearch/
 ENV ELASTICSEARCH_LOG=/var/services/log/
 
@@ -18,6 +18,9 @@ RUN apk update && \
 # Copy files
 COPY elasticsearch.yml /elasticsearch/config/
 
+# Install plugins
+RUN /elasticsearch/bin/plugin install cloud-aws
+
 RUN mkdir -p $ELASTICSEARCH_DATA
 RUN mkdir -p $ELASTICSEARCH_LOG
 RUN adduser -D -H -g 1000 1000
@@ -28,7 +31,5 @@ EXPOSE 9200 9300
 
 # Chnage user - mandatory for ES
 USER 1000
-
-RUN /elasticsearch/bin/plugin install elasticsearch/elasticsearch-cloud-aws/2.7.1
 
 ENTRYPOINT ["/elasticsearch/bin/elasticsearch"]
