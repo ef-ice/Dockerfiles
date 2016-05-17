@@ -30,5 +30,7 @@ EXPOSE 9200 9300
 USER 1000
 
 RUN /elasticsearch/bin/plugin install elasticsearch/elasticsearch-cloud-aws/2.7.1
+RUN /elasticsearch/bin/plugin install license
+RUN /elasticsearch/bin/plugin install marvel-agent
 
 ENTRYPOINT ["/elasticsearch/bin/elasticsearch"]

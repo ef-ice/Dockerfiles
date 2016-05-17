@@ -20,6 +20,8 @@ COPY elasticsearch.yml /elasticsearch/config/
 
 # Install plugins
 RUN /elasticsearch/bin/plugin install cloud-aws
+RUN /elasticsearch/bin/plugin install license
+RUN /elasticsearch/bin/plugin install marvel-agent
 
 RUN mkdir -p $ELASTICSEARCH_DATA
 RUN mkdir -p $ELASTICSEARCH_LOG
