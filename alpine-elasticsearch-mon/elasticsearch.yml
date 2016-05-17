@@ -4,6 +4,7 @@ network:
 
 http:
   port: 9200
+  max_content_length: 512mb
 
 transport:
   tcp:
