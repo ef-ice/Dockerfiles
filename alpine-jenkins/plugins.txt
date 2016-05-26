@@ -29,3 +29,8 @@ selenium
 ssh-credentials
 subversion
 token-macro
+slack
+workflow-aggregator
+github-organization-folder
+pipeline-stage-view
+build-monitor-plugin
