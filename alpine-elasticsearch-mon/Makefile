@@ -2,7 +2,7 @@ default: build
 
 NAME=alpine-elasticsearch
 REGISTRY=quay.io/vnadgir_ef/
-VERSION=2.3.2
+VERSION=2.3.3
 
 build:
 	docker build -t $(NAME) .
