@@ -24,7 +24,7 @@ function parseServers() {
   local result=""
 
   for i in "${!servers[@]}"; do
-    result=$(printf "%s server %s;" "$result" "${servers[i]}")
+    result=$(printf "%sVulcand server %s; " "$result" "${servers[i]}")
   done
 
   echo "$result"

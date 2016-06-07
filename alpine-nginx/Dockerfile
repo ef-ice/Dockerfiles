@@ -1,12 +1,10 @@
-FROM alpine:latest
+FROM alpine:3.3
 
 # TODO can be removed later I think
 RUN sed -i 's~dl-cdn~dl-4~g' /etc/apk/repositories
 
 # Install Nginx.
-RUN apk update && apk upgrade && \
-apk add --update bash nginx apache2-utils && \
-rm -rfv /var/cache/apk/* /tmp/* /var/tmp/*
+RUN apk add --no-cache --upgrade bash nginx apache2-utils
 
 RUN chown -R nginx:nginx /var/lib/nginx
 
