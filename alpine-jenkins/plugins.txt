@@ -1,6 +1,9 @@
+aws-credentials
 aws-java-sdk
+build-monitor-plugin
 conditional-buildstep
 credentials
+credentials-binding
 ec2
 git
 git-client
@@ -26,11 +29,9 @@ scm-api
 scm-sync-configuration
 script-security
 selenium
+slack
 ssh-credentials
+structs
 subversion
 token-macro
-slack
-workflow-aggregator
-github-organization-folder
-pipeline-stage-view
-build-monitor-plugin
+workflow-step-api
