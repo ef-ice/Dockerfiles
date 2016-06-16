@@ -16,7 +16,7 @@ apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 WORKDIR /opt/filebeat
 
 COPY filebeat.conf ./
-COPY docker-cmd.sh ./
+COPY docker-entrypoint.sh /usr/local/bin/.
 
-CMD ["./docker-cmd.sh"]
-# ENTRYPOINT ["/docker-entrypoint.sh"]
+ENTRYPOINT ["docker-entrypoint.sh"]
+CMD []

@@ -19,9 +19,13 @@ if [ -z "$LOGSTASH_NODES" ]; then
    exit 1
 fi
 
-sed -i "s~FILEBEAT_FILEPATH~$FILEBEAT_FILEPATH~g" filebeat.conf
-sed -i "s~LOGSTASH_NODES~$LOGSTASH_NODES~g" filebeat.conf
+if [ -z "$FILEBEAT_ENV" ]; then
+   echo "Missing FILEBEAT_ENV, e.g. QA, STG, LIVE"
+   exit 1
+fi
 
-cat "$FILEBEAT_CONFIG"
+# sed -i "s~FILEBEAT_FILEPATH~$FILEBEAT_FILEPATH~g" filebeat.conf
+# sed -i "s~LOGSTASH_NODES~$LOGSTASH_NODES~g" filebeat.conf
+# cat "$FILEBEAT_CONFIG"
 
 ./filebeat -c "$FILEBEAT_CONFIG" -v -e
