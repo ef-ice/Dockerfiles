@@ -4,10 +4,10 @@ FROM quay.io/vnadgir_ef/alpine-javabase
 
 # Install linux libs
 RUN apk update && apk upgrade && \
-apk add curl jq make git sudo && \
+apk add curl jq make git sudo openssh && \
 rm -rfv /var/cache/apk/* /tmp/* /var/tmp/*
 
-ENV JENKINS_VERSION=1.651.2
+ENV JENKINS_VERSION=1.651.3
 ENV JENKINS_USER jenkins
 ENV JENKINS_GROUP jenkins
 ENV JENKINS_INSTALL_DIR /opt/install/jenkins
