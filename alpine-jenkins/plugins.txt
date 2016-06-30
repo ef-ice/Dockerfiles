@@ -36,3 +36,6 @@ subversion
 token-macro
 workflow-step-api
 rundeck
+sbt
+build-pipeline-plugin
+jquery
