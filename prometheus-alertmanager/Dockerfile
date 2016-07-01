@@ -1,4 +1,7 @@
 FROM prom/alertmanager
-ADD config/ /etc/alertmanager/
-ADD configure-run.sh /configure-run.sh
-ENTRYPOINT ["/configure-run.sh"]
+
+COPY config/alertmanager.yml /etc/alertmanager/alertmanager.yml
+COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
+
+ENTRYPOINT ["docker-entrypoint.sh"]
+CMD []

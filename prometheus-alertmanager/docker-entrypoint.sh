@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 set -o nounset
 
 echo "Starting alertmanager service.."
