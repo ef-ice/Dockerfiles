@@ -1,8 +1,5 @@
 FROM alpine:3.3
 
-# TODO can be removed later I think
-RUN sed -i 's~dl-cdn~dl-4~g' /etc/apk/repositories
-
 # Install Nginx.
 RUN apk add --no-cache --upgrade bash nginx apache2-utils
 
@@ -16,11 +13,12 @@ WORKDIR /etc/nginx
 
 RUN mkdir /usr/share/nginx/logs
 
-COPY docker-cmd.sh docker-cmd.sh
+COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
 COPY nginx.conf nginx.conf
 
 # Expose ports.
 EXPOSE 80
 
 # Define default command.
-CMD ["./docker-cmd.sh"]
+ENTRYPOINT ["docker-entrypoint.sh"]
+CMD []
