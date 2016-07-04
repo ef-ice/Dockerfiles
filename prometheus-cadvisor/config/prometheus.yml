@@ -1,16 +1,17 @@
-# my global config
+# the global config
 global:
-  scrape_interval:     15s # By default, scrape targets every 15 seconds.
-  evaluation_interval: 15s # By default, scrape targets every 15 seconds.
+  scrape_interval: 15s
+  scrape_timeout: 10s
+  evaluation_interval: 15s
 
   external_labels:
     monitor: 'codelab-monitor'
 
 rule_files:
   - rules/cpu.rule
-  - rules/memory.rule
   - rules/disk.rule
   - rules/instance.rule
+  - rules/memory.rule
 
 scrape_configs:
   - job_name: 'prometheus'
@@ -20,4 +21,4 @@ scrape_configs:
 
   - job_name: 'all_ec2_services'
     file_sd_configs:
-      - names: ['/opt/prometheus/tgroups/*.json']
+      - files: ['/opt/prometheus/tgroups/*.json']
