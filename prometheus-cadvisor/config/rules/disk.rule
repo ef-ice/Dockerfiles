@@ -8,3 +8,14 @@ ALERT DiskWillFillIn4Hours
     summary = "Disk will fill in next 4 hours on {{ $labels.instance }}",
     description = "{{ $labels.instance }} has a disk that will be filled in the next 4 hours if the present rate of growth continues (current value: {{ $value }}%)",
   }
+
+  ALERT DiskUsageIsAboveDefinedThreshold
+  IF node_filesystem_free / node_filesystem_size < 0.3
+  FOR 5m
+  LABELS {
+    severity="page"
+  }
+  ANNOTATIONS {
+    summary = "Disk is currently at 70% usage. {{ $labels.instance }}",
+    description = "{{ $labels.instance }} has a disk that is at 70% usage.",
+  }
