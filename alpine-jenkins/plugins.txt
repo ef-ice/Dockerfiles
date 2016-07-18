@@ -5,7 +5,6 @@ conditional-buildstep
 credentials
 credentials-binding
 ec2
-git
 git-client
 github
 github-api
@@ -39,3 +38,4 @@ rundeck
 sbt
 build-pipeline-plugin
 jquery
+git
