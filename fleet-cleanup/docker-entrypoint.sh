@@ -8,17 +8,32 @@ if [ -z "$FLEET_HOST" ]; then
 fi
 
 if [ -z "$FLEET_PORT" ]; then
-   echo "Missing FLEET_HOST environment variable"
+   echo "Missing FLEET_PORT environment variable"
    exit 1
 fi
 
+# MACHINE_ID=$(fleetctl list-machines -full | grep "$HOST_IP" | awk '{print $1}')
 if [ -z "$MACHINE_ID" ]; then
    echo "Missing MACHINE_ID environment variable"
    exit 1
 fi
 
-# HOST_IP=$(/usr/bin/ifconfig eth0 | sed -n '2 p' | awk '{print $2}' | cut -d':' -f2)
-# MACHINE_ID=$(fleetctl list-machines -full | grep "$HOST_IP" | awk '{print $1}')
+#
+# Deleting dangling docker images
+#
+docker images --filter "dangling=true" -q | xargs -r docker rmi -f
+
+#
+# Deleting old docker images
+#
+for item in $(docker images --format '{{.Repository}}' | sort | uniq -cd | awk '{print $2}'); do
+  echo "Deleting docker images for $item"
+  docker images --format '{{.Repository}}:{{.Tag}}' | grep "$item" | sort -Vr | sed '1d' | xargs -r docker rmi -f
+done
+
+#
+# Deleting irrelevant docker containers
+#
 FLEET=$(curl -s "http://$FLEET_HOST:$FLEET_PORT/fleet/v1/state" | \
 jq -c '.states[] | "\(.name) \(.machineID)"' | \
 grep "$MACHINE_ID" | sed s~\"~~g | awk '{print $1}' | \
