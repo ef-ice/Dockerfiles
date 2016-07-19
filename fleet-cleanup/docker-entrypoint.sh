@@ -1,6 +1,7 @@
 #!/bin/bash
 set -o nounset
 set -o pipefail
+set -o errexit
 
 if [ -z "$FLEET_HOST" ]; then
    echo "Missing FLEET_HOST environment variable"
@@ -17,19 +18,6 @@ if [ -z "$MACHINE_ID" ]; then
    echo "Missing MACHINE_ID environment variable"
    exit 1
 fi
-
-#
-# Deleting dangling docker images
-#
-docker images --filter "dangling=true" -q | xargs -r docker rmi -f
-
-#
-# Deleting old docker images
-#
-for item in $(docker images --format '{{.Repository}}' | sort | uniq -cd | awk '{print $2}'); do
-  echo "Deleting docker images for $item"
-  docker images --format '{{.Repository}}:{{.Tag}}' | grep "$item" | sort -Vr | sed '1d' | xargs -r docker rmi -f
-done
 
 #
 # Deleting irrelevant docker containers
