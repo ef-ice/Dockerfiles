@@ -1,5 +1,5 @@
 cluster:
-  name: elasticsearch
+  name: ${CLUSTER_NAME:-elasticsearch}
 
 bootstrap:
   mlockall: true
@@ -23,7 +23,7 @@ path:
 
 cloud:
   kubernetes:
-    service: elasticsearch
-    namespace: elasticsearch
+    service: ${KUBERNETES_SERVICE:-default}
+    namespace: ${KUBERNETES_NAMESPACE:-default}
 discovery:
   type: kubernetes
