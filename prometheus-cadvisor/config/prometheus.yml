@@ -24,12 +24,9 @@ scrape_configs:
     relabel_configs:
       - source_labels: [__meta_ec2_tag_platform]
         regex: PLATFORM_TAG_REGEX
-        action: keep
         target_label: platform
       - source_labels: [__meta_ec2_tag_environment]
         regex: ENVIRONMENT_TAG_REGEX
-        action: keep
         target_label: environment
       - source_labels: [__meta_ec2_availability_zone]
-        action: keep
         target_label: az
