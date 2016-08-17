@@ -23,7 +23,7 @@ path:
 
 cloud:
   kubernetes:
-    service: ${KUBERNETES_SERVICE:default}
+    service: ${KUBERNETES_SERVICE:elasticsearch}
     namespace: ${KUBERNETES_NAMESPACE:default}
 discovery:
   type: kubernetes
