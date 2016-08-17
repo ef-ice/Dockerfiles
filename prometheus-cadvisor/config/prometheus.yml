@@ -4,9 +4,6 @@ global:
   scrape_timeout: 10s
   evaluation_interval: 10s
 
-  external_labels:
-    monitor: 'codelab-monitor'
-
 rule_files:
   - rules/cpu.rule
   - rules/disk.rule
@@ -22,10 +19,17 @@ scrape_configs:
     ec2_sd_configs:
       - region: eu-west-1
         port: 6263
+      - region: eu-west-1
+        port: 6262
     relabel_configs:
       - source_labels: [__meta_ec2_tag_platform]
         regex: PLATFORM_TAG_REGEX
         action: keep
+        target_label: platform
       - source_labels: [__meta_ec2_tag_environment]
         regex: ENVIRONMENT_TAG_REGEX
         action: keep
+        target_label: environment
+      - source_labels: [__meta_ec2_availability_zone]
+        action: keep
+        target_label: az
