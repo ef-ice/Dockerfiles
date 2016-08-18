@@ -4,7 +4,7 @@ FROM quay.io/vnadgir_ef/alpine-javabase
 
 # Install linux libs
 RUN apk update && apk upgrade && \
-apk add curl jq make git sudo openssh && \
+apk add curl jq make git sudo openssh nodejs && \
 rm -rfv /var/cache/apk/* /tmp/* /var/tmp/*
 
 ENV JENKINS_VERSION=1.651.3

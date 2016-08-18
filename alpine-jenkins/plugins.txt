@@ -1,5 +1,6 @@
 aws-credentials
 aws-java-sdk
+ansicolor
 build-monitor-plugin
 conditional-buildstep
 credentials
@@ -39,3 +40,4 @@ sbt
 build-pipeline-plugin
 jquery
 git
+nodejs
