@@ -10,9 +10,6 @@ rm elasticsearch-$APP_VERSION.tar.gz && \
 mv /elasticsearch-$APP_VERSION /elasticsearch && \
 rm $(find /elasticsearch | egrep "\.(exe|bat|txt|textile)")
 
-# Copy files
-COPY elasticsearch.yml /elasticsearch/config/
-
 # Install plugins
 RUN /elasticsearch/bin/plugin install license
 RUN /elasticsearch/bin/plugin install marvel-agent
@@ -25,6 +22,9 @@ RUN mkdir -p $ELASTICSEARCH_DATA
 RUN mkdir -p $ELASTICSEARCH_LOG
 RUN adduser -D -H -g 1000 1000
 RUN chown -R 1000:1000 /elasticsearch $ELASTICSEARCH_DATA $ELASTICSEARCH_LOG
+
+# Copy files
+COPY elasticsearch.yml /elasticsearch/config/
 
 # Expose ports
 EXPOSE 9200 9300

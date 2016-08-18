@@ -22,8 +22,8 @@ transport:
     port: 9300
 
 path:
-  data: /var/services/data/elasticsearch
-  logs: /var/services/log/elasticsearch
+  data: ${DATA_PATH:/var/data/elasticsearch}
+  logs: ${LOG_PATH:/var/log/elasticsearch}
   plugins: /elasticsearch/plugins
 
 cloud:
