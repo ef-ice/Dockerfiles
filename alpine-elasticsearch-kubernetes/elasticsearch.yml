@@ -5,7 +5,12 @@ bootstrap:
   mlockall: true
 
 network:
-  bind_host: 0.0.0.0
+  host: _site_
+
+node:
+  data: true
+  master: true
+  client: false
 
 http:
   port: 9200
