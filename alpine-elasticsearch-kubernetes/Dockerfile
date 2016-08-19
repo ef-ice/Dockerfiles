@@ -15,8 +15,8 @@ RUN /elasticsearch/bin/plugin install license
 RUN /elasticsearch/bin/plugin install marvel-agent
 RUN /elasticsearch/bin/plugin install io.fabric8/elasticsearch-cloud-kubernetes/$APP_VERSION
 
-ENV ELASTICSEARCH_DATA=/var/services/data/elasticsearch
-ENV ELASTICSEARCH_LOG=/var/services/log/elasticsearch
+ENV ELASTICSEARCH_DATA=/var/elasticsearch/data
+ENV ELASTICSEARCH_LOG=/var/elasticsearch/log
 
 RUN mkdir -p $ELASTICSEARCH_DATA
 RUN mkdir -p $ELASTICSEARCH_LOG
