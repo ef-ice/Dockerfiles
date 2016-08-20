@@ -5,5 +5,5 @@ directory=$2
 aws s3 cp s3://$S3_BUCKET/$backup.tar.gz $backup.tar.gz
 
 mkdir -p $directory
-tar -xvzf $backup.tar.gz -C $directory --strip-components=1
+tar -xvzf $backup.tar.gz -C $directory
 rm $backup.tar.gz
