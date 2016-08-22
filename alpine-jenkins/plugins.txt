@@ -5,6 +5,7 @@ build-monitor-plugin
 conditional-buildstep
 credentials
 credentials-binding
+bouncycastle-api
 ec2
 git-client
 github
@@ -39,5 +40,6 @@ rundeck
 sbt
 build-pipeline-plugin
 jquery
+workflow-scm-step
 git
 nodejs
