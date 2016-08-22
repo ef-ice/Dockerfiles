@@ -10,7 +10,7 @@
 
 set -e
 
-REF=/vol/jenkins/plugins
+REF=/opt/install/jenkins/plugins
 mkdir -p $REF
 
 while read spec || [ -n "$spec" ]; do
