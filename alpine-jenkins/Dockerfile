@@ -28,6 +28,7 @@ chown -R ${JENKINS_USER}:${JENKINS_GROUP} ${JENKINS_HOME} && \
 chown -R ${JENKINS_USER}:${JENKINS_GROUP} ${JENKINS_WAR}
 
 # Install jenkins plugins
+ENV JENKINS_UC=https://updates.jenkins.io
 COPY plugins.txt $JENKINS_INSTALL_DIR
 COPY install-plugins.sh /usr/local/bin/install-plugins.sh
 RUN /usr/local/bin/install-plugins.sh $JENKINS_INSTALL_DIR/plugins.txt
