@@ -29,10 +29,8 @@ chown -R ${JENKINS_USER}:${JENKINS_GROUP} ${JENKINS_WAR}
 
 # Install jenkins plugins
 COPY plugins.txt $JENKINS_INSTALL_DIR
-RUN for plugin in `cat $JENKINS_INSTALL_DIR/plugins.txt`; do \
-  echo "https://updates.jenkins-ci.org/latest/${plugin}.hpi" ;\
-  curl -SL https://updates.jenkins-ci.org/latest/${plugin}.hpi --output $JENKINS_PLUGINS/${plugin}.hpi; \
-  done;
+COPY install-plugins.sh /usr/local/bin/install-plugins.sh
+RUN /usr/local/bin/install-plugins.sh $JENKINS_INSTALL_DIR/plugins.txt
 
 RUN sudo chown -R jenkins:jenkins ${JENKINS_INSTALL_DIR}
 
