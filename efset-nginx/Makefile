@@ -1,6 +1,6 @@
 default: build
 
-NAME=jessie-efset-nginx
+NAME=efset-nginx
 REGISTRY=quay.io/vnadgir_ef/
 
 build:
