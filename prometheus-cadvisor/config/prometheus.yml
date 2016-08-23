@@ -21,6 +21,8 @@ scrape_configs:
         port: 6263
       - region: eu-west-1
         port: 6262
+      - region: eu-west-1
+        port: 2379
     relabel_configs:
       - source_labels: [__meta_ec2_tag_platform]
         regex: PLATFORM_TAG_REGEX
