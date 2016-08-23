@@ -20,7 +20,7 @@ apk del curl && rm -rfv /var/cache/apk/* /tmp/* /var/tmp/*
 
 # Install plugins
 RUN /opt/logstash/bin/logstash-plugin install logstash-input-beats logstash-input-http
-RUN /opt/logstash/bin/logstash-plugin install logstash-filter-grok logstash-filter-json
+RUN /opt/logstash/bin/logstash-plugin install logstash-filter-grok logstash-filter-json logstash-filter-geoip
 RUN /opt/logstash/bin/logstash-plugin install logstash-output-elasticsearch
 
 # Prepare
