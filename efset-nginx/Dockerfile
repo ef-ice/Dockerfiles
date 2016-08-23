@@ -19,6 +19,16 @@ RUN apt-get update && \
 
 ENV PATH /usr/local/node/bin:$PATH
 RUN npm install -g bower grunt-cli
+#Optimisation for avoiding the repeated running of npm and bower install
+COPY dependencies/package.json /var/www/package.json
+COPY dependencies/bower.json /var/www/bower.json
+RUN jq -r '.devDependencies | to_entries[] | .key + "@" + .value' < package.json | xargs npm install && \
+  jq -r '.dependencies | to_entries[] | .key + "@" + .value' < package.json | xargs npm install && \
+  bower install --allow-root --production
+
+#running npm and bower install on the actual dependency manifests to update the node modules
 ONBUILD COPY package.json /var/www/package.json
+ONBUILD COPY bower.json /var/www/bower.json
 ONBUILD RUN jq -r '.devDependencies | to_entries[] | .key + "@" + .value' < package.json | xargs npm install && \
-  jq -r '.dependencies | to_entries[] | .key + "@" + .value' < package.json | xargs npm install 
+  jq -r '.dependencies | to_entries[] | .key + "@" + .value' < package.json | xargs npm install && \
+  bower install --allow-root --production

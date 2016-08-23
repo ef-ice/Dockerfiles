@@ -1,0 +1,41 @@
+{
+  "name": "abcd",
+  "moduleType": [
+    "amd"
+  ],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests",
+    "assets"
+  ],
+  "dependencies": {
+    "requirejs": "2.1.15",
+    "troopjs": "3.0.0-pr.2+bcbc8eb",
+    "troopjs-contrib-raygun": "^0",
+    "bootstrap": "^3.1",
+    "poly": "^0.6",
+    "when": "~3.4",
+    "query-string": "~1",
+    "jquery": "~1",
+    "jquery-cookie": "~1.4.1",
+    "mu-template": "^1",
+    "requirejs-text": "~2.0.12",
+    "require-css": "~0.1",
+    "console-polyfill": "~0.2.1",
+    "uri.js": "~1.16.0",
+    "mediaelement": "~2.18.1"
+  },
+  "resolutions": {
+    "when": "3.4.6",
+    "requirejs": "2.1.20",
+    "requirejs-text": "~2.0.12",
+    "jquery": "1.12.4"
+  },
+  "devDependencies": {
+    "qunit": "1.17.0",
+    "qunit-parameterize": "0.4.0"
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "name": "abcd",
+  "devDependencies": {
+    "csso": "^1.3.11",
+    "grunt": "~0.4",
+    "grunt-angular-gettext": "^2.0.1",
+    "grunt-angular-gettext-generate-html": "~1",
+    "grunt-cache-bust": "^1.3.0",
+    "grunt-contrib-clean": "~0.5",
+    "grunt-contrib-copy": "^0.7.0",
+    "grunt-contrib-jshint": "~0.6.0",
+    "grunt-contrib-qunit": "~0.2.0",
+    "grunt-contrib-requirejs": "~0.4",
+    "grunt-contrib-uglify": "~0.4",
+    "grunt-css-url-rewrite": "^0.3.5",
+    "grunt-exec": "^0.4.7",
+    "grunt-file-creator": "^0.1.3",
+    "grunt-hash-required": "^0.1.5",
+    "grunt-processhtml": "^0.3.8",
+    "grunt-regex-replace": "^0.2.9",
+    "grunt-requirejs-transformconfig": "0.0.4",
+    "grunt-usemin": "^3.1.1",
+    "grunt-version": "^1.1.1",
+    "load-grunt-tasks": "~0.4"
+  },
+  "dependencies": {
+    "cssmin": "^0.4.3",
+    "grunt-contrib-concat": "^0.5.1",
+    "grunt-contrib-cssmin": "^0.13.0"
+  }
+}
