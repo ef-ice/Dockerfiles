@@ -20,5 +20,5 @@ RUN apt-get update && \
 ENV PATH /usr/local/node/bin:$PATH
 RUN npm install -g bower grunt-cli
 ONBUILD COPY package.json /var/www/package.json
-ONBUILD RUN jq -r '.devDependencies | to_entries[] | .key + "@" + .value' < package.json | xargs npm install
-ONBUILD RUN jq -r '.dependencies | to_entries[] | .key + "@" + .value' < package.json | xargs npm install 
+ONBUILD RUN jq -r '.devDependencies | to_entries[] | .key + "@" + .value' < package.json | xargs npm install && \
+  jq -r '.dependencies | to_entries[] | .key + "@" + .value' < package.json | xargs npm install 
