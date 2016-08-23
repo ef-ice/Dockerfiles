@@ -1,0 +1,58 @@
+{
+  "name": "testing",
+  "version": "1.9.47",
+  "moduleType": [
+    "amd"
+  ],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests",
+    "assets"
+  ],
+  "dependencies": {
+    "requirejs": "2.1.15",
+    "troopjs": "ef-ice/troopjs#283dbb48081cb4e3233b117158a65fae552fd7a9",
+    "bootstrap": "^3.1",
+    "poly": "^0.6",
+    "when": "~3.7",
+    "jquery": "~1",
+    "mu-template": "^1",
+    "mu-log": "~3.0.0",
+    "jsonselect": "d642d73c1ff71627fc989e194875725c71b8d5a2",
+    "require-css": "englishtown/require-css#master",
+    "respond": "englishtown/Respond#master",
+    "moment": "~2.8",
+    "fastclick": "~1.0",
+    "requirejs-text": "~2.0.12",
+    "has": "*",
+    "query-string": "1.0.0",
+    "jquery-cookie": "~1.4.1",
+    "troopjs-contrib-audio5js-player": "ef-ice/troopjs-contrib-audio5js-player#master",
+    "troopjs-contrib-com": "~2",
+    "troopjs-contrib-markdown": "~1",
+    "troopjs-contrib-bootstrap": "~1",
+    "troopjs-contrib-raygun": "^0",
+    "spin.js": "~2.0",
+    "enquire": "~2.1.2",
+    "media-match": "~2.0.2",
+    "lodash": "~3.10.0",
+    "jquery.serializeJSON": "~2.6.1",
+    "viewport-units-buggyfill": "~0.5.4",
+    "console-polyfill": "~0.2.1",
+    "urijs": "~1.18.0"
+  },
+  "resolutions": {
+    "when": "~3.7",
+    "requirejs": "2.1.15",
+    "requirejs-text": "~2.0.12",
+    "jquery": "1.12.4",
+    "troopjs": "283dbb48081cb4e3233b117158a65fae552fd7a9"
+  },
+  "devDependencies": {
+    "qunit": "1.17.0",
+    "qunit-parameterize": "0.4.0"
+  }
+}
