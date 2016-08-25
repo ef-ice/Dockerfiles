@@ -40,6 +40,13 @@ RUN echo "jenkins ALL=NOPASSWD: /bin/docker.io" >> /etc/sudoers
 COPY docker.sh /usr/bin/docker
 RUN chmod +x /usr/bin/docker
 
+# get ca cert
+RUN curl https://curl.haxx.se/ca/cacert.pem > /etc/ssl/certs/cacert.pem
+# alias for curl
+RUN echo 'alias curl="curl --cacert /etc/ssl/certs/cacert.pem"' >> /opt/jenkins/.bashrc
+RUN source /opt/jenkins/.bashrc
+
+
 # For web UI
 EXPOSE 8080
 
