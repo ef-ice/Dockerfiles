@@ -6,7 +6,7 @@
             "Type": "A",
             "TTL": 60,
             "ResourceRecords": [{
-                "Value": "RESOURCE_IP"
+                "Value": "RESOURCE_HOSTS"
             }]
         }
     }]
