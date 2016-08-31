@@ -1,11 +1,15 @@
-FROM quay.io/vnadgir_ef/alpine-javabase
-
-# Inspired by https://github.com/cgswong/docker-jenkins
+FROM quay.io/vnadgir_ef/alpine-java
 
 # Install linux libs
-RUN apk update && apk upgrade && \
-apk add curl jq make git sudo openssh nodejs && \
-rm -rfv /var/cache/apk/* /tmp/* /var/tmp/*
+RUN apk add --update --no-cache jq make git sudo openssh nodejs bash
+
+ENV M2_HOME=/usr/lib/mvn M2=/usr/lib/mvn/bin PATH=$PATH:/usr/lib/mvn:/usr/lib/mvn/bin MAVEN_VERSION=3.3.9
+
+# Install
+RUN curl -L -O http://ftp.fau.de/apache/maven/maven-3/$MAVEN_VERSION/binaries/apache-maven-$MAVEN_VERSION-bin.tar.gz && \
+tar -zxvf apache-maven-$MAVEN_VERSION-bin.tar.gz && \
+rm apache-maven-$MAVEN_VERSION-bin.tar.gz && \
+mv apache-maven-$MAVEN_VERSION /usr/lib/mvn
 
 ENV JENKINS_VERSION=1.651.3
 ENV JENKINS_USER jenkins
@@ -25,7 +29,10 @@ curl -SL https://updates.jenkins-ci.org/download/war/$JENKINS_VERSION/jenkins.wa
 RUN addgroup ${JENKINS_GROUP} && \
 adduser -h ${JENKINS_HOME} -D -s /bin/bash -G ${JENKINS_GROUP} ${JENKINS_USER} && \
 chown -R ${JENKINS_USER}:${JENKINS_GROUP} ${JENKINS_HOME} && \
-chown -R ${JENKINS_USER}:${JENKINS_GROUP} ${JENKINS_WAR}
+chown -R ${JENKINS_USER}:${JENKINS_GROUP} ${JENKINS_WAR} && \
+chown -R ${JENKINS_USER}:${JENKINS_GROUP} ${JENKINS_INSTALL_DIR} && \
+chown ${JENKINS_USER}:${JENKINS_GROUP} /lib/lib* && \
+chown ${JENKINS_USER}:${JENKINS_GROUP} /usr/lib/lib*
 
 # Install jenkins plugins
 ENV JENKINS_UC=https://updates.jenkins.io
@@ -33,18 +40,11 @@ COPY plugins.txt $JENKINS_INSTALL_DIR
 COPY install-plugins.sh /usr/local/bin/install-plugins.sh
 RUN /usr/local/bin/install-plugins.sh $JENKINS_INSTALL_DIR/plugins.txt
 
-RUN sudo chown -R jenkins:jenkins ${JENKINS_INSTALL_DIR}
 
 # Docker stuff
-RUN echo "jenkins ALL=NOPASSWD: /bin/docker.io" >> /etc/sudoers
+RUN echo "jenkins ALL=NOPASSWD: /usr/bin/docker" >> /etc/sudoers
 COPY docker.sh /usr/bin/docker
 RUN chmod +x /usr/bin/docker
-
-# get ca cert
-RUN curl https://curl.haxx.se/ca/cacert.pem > /etc/ssl/certs/cacert.pem
-# alias for curl
-RUN echo 'alias curl="curl --cacert /etc/ssl/certs/cacert.pem"' >> /opt/jenkins/.bashrc
-RUN source /opt/jenkins/.bashrc
 
 
 # For web UI

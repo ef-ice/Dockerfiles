@@ -73,7 +73,7 @@ repository:1.2
 run-condition:1.0
 s3:0.8
 scm-api:1.0
-script-security:1.17
+script-security:1.22
 ssh-agent:1.8
 ssh-credentials:1.11
 ssh-slaves:1.10

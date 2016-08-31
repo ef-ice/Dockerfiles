@@ -39,6 +39,10 @@ rm -rf /opt/jdk/*src.zip \
        /opt/jdk/jre/lib/amd64/libjavafx*.so \
        /opt/jdk/jre/lib/amd64/libjfx*.so
 
+# sym links for glibc
+RUN ln -s /usr/lib/libgcc_s.so.1 /opt/jdk/jre/lib/amd64/libgcc_s.so.1
+RUN ln -s /lib/libc.musl-x86_64.so.1 /opt/jdk/jre/lib/amd64/libc.musl-x86_64.so.1
+
  # Set environment
 ENV JAVA_HOME=/opt/jdk
 ENV PATH=${PATH}:${JAVA_HOME}/bin
