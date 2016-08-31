@@ -25,19 +25,21 @@ echo "[Credentials]" >> /etc/boto.cfg
 echo "aws_access_key_id = $AWS_ACCESS_KEY_ID" >> /etc/boto.cfg
 echo "aws_secret_access_key = $AWS_SECRET_ACCESS_KEY" >> /etc/boto.cfg
 
-# Updates resource file with provided values
-cat resource-changes.json | \
-jq '.Changes[].ResourceRecordSet.Name=env.RESOURCE_NAME' | \
-jq 'del(.Changes[].ResourceRecordSet.ResourceRecords[])' \
-> resource-changes.$$.json && \
-mv resource-changes.$$.json resource-changes.json
+# Parses hosts
+IFS=',' read -a HOSTS <<< "$RESOURCE_HOSTS"
 
-for host in $(echo "$RESOURCE_HOSTS" | tr "," "\n"); do
-  cat resource-changes.json | \
-  jq --arg theHost $host '.Changes[].ResourceRecordSet.ResourceRecords |= (. + [{"Value":$theHost}])' \
-  > resource-changes.$$.json
-  mv resource-changes.$$.json resource-changes.json
+HOST_VALUES="\"${HOSTS[0]}\""
+for host in "${HOSTS[@]:1}"; do
+    HOST_VALUES="$HOST_VALUES,\"$host\""
 done
+
+{
+jq '.Changes[].ResourceRecordSet.Name=env.RESOURCE_NAME' | \
+jq 'del(.Changes[].ResourceRecordSet.ResourceRecords[])' | \
+jq ".Changes[].ResourceRecordSet.ResourceRecords = ([$HOST_VALUES] | map({\"Value\":.}))"
+} < resource-changes.json > resource-changes.$$.json
+
+mv resource-changes.$$.json resource-changes.json
 
 jq '.' resource-changes.json
 
