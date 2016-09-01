@@ -8,7 +8,7 @@ authentication-tokens:1.2
 aws-java-sdk:1.10.16
 build-failure-analyzer:1.13.2
 build-monitor-plugin:1.6+build.164
-build-pipeline-plugin:1.4.9
+build-pipeline-plugin:1.5.4
 build-timeout:1.15.1
 branch-api:1.1
 cloudbees-folder:5.1
@@ -31,7 +31,7 @@ external-monitor-job:1.4
 fstrigger:0.39
 gradle:1.24
 ghprb:1.29.5
-git:2.4.0
+git:2.5.3
 git-client:1.19.0
 git-server:1.6
 github:1.14.0
@@ -91,7 +91,7 @@ workflow-cps-global-lib:1.15
 workflow-durable-task-step:1.15
 workflow-job:1.15
 workflow-multibranch:1.15
-workflow-scm-step:1.15
+workflow-scm-step:2.2
 workflow-step-api:1.15
 workflow-support:1.15
 ws-cleanup:0.28
