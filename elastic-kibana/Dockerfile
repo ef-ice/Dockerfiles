@@ -1,4 +1,8 @@
-FROM kibana:4.5.4
+FROM kibana:4.6.1
 
-RUN /opt/kibana/bin/kibana plugin --install elasticsearch/marvel/2.3.3 && \
-chown -R kibana:kibana /opt/kibana
+ENV MARVEL_VERSION=2.4.0
+RUN /opt/kibana/bin/kibana plugin --install elasticsearch/marvel/$MARVEL_VERSION
+RUN /opt/kibana/bin/kibana plugin --install elastic/sense
+
+
+RUN chown -R kibana:kibana /opt/kibana

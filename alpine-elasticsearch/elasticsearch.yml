@@ -1,27 +1,28 @@
-# listen on all interfaces
+cluster:
+  name: ${CLUSTER_NAME:elasticsearch}
+
+bootstrap:
+  mlockall: true
+
 network:
-  bind_host: 0.0.0.0
+  host: _site_
 
 http:
   port: 9200
-  max_content_length: 512mb
+  compression: true
+  max_content_length: 256mb
 
 transport:
   tcp:
     port: 9300
 
-cluster:
-  name: elasticsearch
-
 path:
-  data: /var/services/data/elasticsearch/
-  logs: /var/services/log/
+  data: ${ELASTICSEARCH_DATA}
+  logs: ${ELASTICSEARCH_LOG}
   plugins: /elasticsearch/plugins
 
 cloud:
   aws:
     protocol: http
-  s3:
-    protocol: http
-  ec2:
-    protocol: http
+discovery:
+  type: ec2

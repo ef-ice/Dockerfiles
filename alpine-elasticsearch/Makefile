@@ -2,11 +2,14 @@ default: build
 
 NAME=alpine-elasticsearch
 REGISTRY=quay.io/vnadgir_ef/
-VERSION=1.7.3
+VERSION=2.4.0
 
 build:
 	docker build -t $(NAME) .
 
 push:
-	docker tag $(NAME) $(REGISTRY)$(NAME):$(VERSION)
+	docker build -t $(REGISTRY)$(NAME):$(VERSION) .
 	docker push $(REGISTRY)$(NAME):$(VERSION)
+
+clean:
+	docker build --no-cache -t $(NAME) .
