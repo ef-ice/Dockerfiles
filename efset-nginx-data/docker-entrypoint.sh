@@ -8,4 +8,4 @@ fi
 
 sed -i "s/PROXY_PASS_URL/$PROXY_PASS_URL/g" /etc/nginx/conf/nginx.conf
 
-nginx
+nginx -g 'daemon off;'
