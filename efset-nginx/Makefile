@@ -7,5 +7,5 @@ build:
 	docker build -t $(NAME) .
 
 push:
-	docker tag $(NAME) $(REGISTRY)$(NAME):v4.5.0-onbuild-dependency-optimised
+	docker tag $(NAME) $(REGISTRY)$(NAME):v4.5.0-onbuild
 	docker push $(REGISTRY)$(NAME)
