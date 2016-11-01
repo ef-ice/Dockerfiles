@@ -30,13 +30,14 @@ echo "$SSH_KEY" > /root/.ssh/id_rsa && \
 chmod 400 /root/.ssh/id_rsa
 
 cassandra-snapshotter \
---s3-bucket-name=efset-cassandra-backups \
---s3-bucket-region=eu-west-1 \
---s3-base-path=$S3_BASE_PATH \
---aws-access-key-id=$AWS_ACCESS_KEY_ID \
---aws-secret-access-key=$AWS_SECRET_ACCESS_KEY \
+--s3-bucket-name="efset-cassandra-backups" \
+--s3-bucket-region="eu-west-1" \
+--s3-base-path="$S3_BASE_PATH" \
+--aws-access-key-id="$AWS_ACCESS_KEY_ID" \
+--aws-secret-access-key="$AWS_SECRET_ACCESS_KEY" \
 backup \
---hosts=$CASSANDRA_HOSTS \
---user=ubuntu \
---sshkey=/root/.ssh/id_rsa \
---keyspaces=athena
+--hosts="$CASSANDRA_HOSTS" \
+--user="ubuntu" \
+--sshkey="/root/.ssh/id_rsa" \
+--keyspaces="athena" \
+--cassandra-conf-path="/etc/cassandra/"
