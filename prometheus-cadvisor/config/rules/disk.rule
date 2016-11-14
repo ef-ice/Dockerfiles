@@ -1,21 +1,10 @@
-ALERT DiskWillFillIn4Hours
-  IF predict_linear(node_filesystem_free[1h], 4*3600) < 0
-  FOR 5m
+ALERT DiskUsageIsAboveDefinedThreshold
+  IF node_filesystem_free / node_filesystem_size < 0.15
+  FOR 30m
   LABELS {
     severity="page"
   }
   ANNOTATIONS {
-    summary = "Disk will fill in next 4 hours on {{ $labels.instance }}",
-    description = "{{ $labels.instance }} has a disk that will be filled in the next 4 hours if the present rate of growth continues (current value: {{ $value }}%)",
-  }
-
-  ALERT DiskUsageIsAboveDefinedThreshold
-  IF node_filesystem_free / node_filesystem_size < 0.3
-  FOR 5m
-  LABELS {
-    severity="page"
-  }
-  ANNOTATIONS {
-    summary = "Disk is currently at 70% usage. {{ $labels.instance }}",
-    description = "{{ $labels.instance }} has a disk that is at 70% usage.",
+    summary = "High Disk Usage on {{ $labels.instance }}",
+    description = "Disk Usage on {{ $labels.instance }} over the last 30 minutes exceeds threshold (current value: {{ $value }})",
   }

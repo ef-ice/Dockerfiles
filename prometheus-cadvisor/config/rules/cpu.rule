@@ -1,11 +1,11 @@
-# Alert for any instance that has CPU usage of more than 85% for more than 5 mins
+# Alert for any instance that has CPU usage of more than 85% for more than 30 mins
 ALERT HighCpuUsage
   IF rate(node_cpu{mode="idle"}[5m]) < 0.15
-  FOR 15m
+  FOR 30m
   LABELS {
     severity="page"
   }
   ANNOTATIONS {
     summary = "High CPU Usage on {{ $labels.instance }}",
-    description = "CPU Usage on {{ $labels.instance }} over the last 5 minutes exceeds threshold (current value: {{ $value }} Idle)",
+    description = "CPU Usage on {{ $labels.instance }} over the last 30 minutes exceeds threshold (current value: {{ $value }} Idle)",
   }
