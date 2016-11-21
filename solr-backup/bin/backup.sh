@@ -24,16 +24,6 @@ if [ -z "$S3_BASE_PATH" ]; then
    exit 1
 fi
 
-if [ -z "$SSH_KEY" ]; then
-   echo "Missing SSH_KEY environment variable"
-   exit 1
-fi
-
-
-mkdir -p /root/.ssh && \
-echo "$SSH_KEY" > /root/.ssh/id_rsa && \
-chmod 400 /root/.ssh/id_rsa
-
 curl -o - -s http://$SOLR_HOST/solr/$CORE/replication?command=backup&wt=json | jq '.'
 
 while [[ curl -o - -s "http://$SOLR_HOST/solr/$CORE/replication?command=details&wt=json" | jq '.details.backup' | grep "fail" ]];
