@@ -26,11 +26,15 @@ fi
 
 curl -o - -s http://$SOLR_HOST/solr/$CORE/replication?command=backup&wt=json | jq '.'
 
-while [[ curl -o - -s "http://$SOLR_HOST/solr/$CORE/replication?command=details&wt=json" | jq '.details.backup' | grep "fail" ]];
+while curl -o - -s "http://$SOLR_HOST/solr/$CORE/replication?command=details&wt=json" | jq '.details.backup' | grep -v "success";
 do
   echo "Sleeping 10 seconds for backup to complete..."
   sleep 10
 done
 
-
-aws s3 sync /var/lib/solr/data/$CORE/data/snapshot.* s3://$S3_BASE_PATH/
+for f in `find /var/lib/solr/data/$CORE/data/ -type d -name "snapshot.*"`;
+do
+  echo $f
+  prefix=$(echo $f | sed 's,/var/lib/solr/data/.*/data/,,g');
+  aws s3 sync $f/ s3://$S3_BASE_PATH/$prefix;
+done
