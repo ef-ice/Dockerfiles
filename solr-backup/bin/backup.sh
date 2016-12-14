@@ -26,7 +26,7 @@ fi
 
 curl -o - -s http://$SOLR_HOST/solr/$CORE/replication?command=backup&wt=json | jq '.'
 
-while curl -o - -s "http://$SOLR_HOST/solr/$CORE/replication?command=details&wt=json" | jq '.details.backup' | grep -v "success";
+while ! curl -o - -s "http://$SOLR_HOST/solr/$CORE/replication?command=details&wt=json" | jq '.details.backup' | grep "success";
 do
   echo "Sleeping 10 seconds for backup to complete..."
   sleep 10
