@@ -50,4 +50,5 @@ backup \
 --user="ubuntu" \
 --sshkey="/root/.ssh/id_rsa" \
 --keyspaces="athena" \
---cassandra-conf-path="/etc/cassandra/"
+--cassandra-conf-path="/etc/cassandra/" \
+"$@"
