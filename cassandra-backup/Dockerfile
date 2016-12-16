@@ -1,6 +1,6 @@
 FROM debian:jessie
 
-RUN apt-get update && apt-get install -y lzop python2.7-dev curl gcc && \
+RUN apt-get update && apt-get install -y lzop python2.7-dev libssl-dev curl gcc && \
 apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 RUN ln -s /usr/bin/python2.7 /usr/local/bin/python

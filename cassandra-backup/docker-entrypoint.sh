@@ -15,6 +15,16 @@ if [ -z "$CASSANDRA_HOSTS" ]; then
    exit 1
 fi
 
+if [ -z "$S3_REGION" ]; then
+   echo "Missing S3_REGION environment variable"
+   exit 1
+fi
+
+if [ -z "$S3_BUCKET" ]; then
+   echo "Missing S3_BUCKET environment variable"
+   exit 1
+fi
+
 if [ -z "$S3_BASE_PATH" ]; then
    echo "Missing S3_BASE_PATH environment variable"
    exit 1
@@ -30,8 +40,8 @@ echo "$SSH_KEY" > /root/.ssh/id_rsa && \
 chmod 400 /root/.ssh/id_rsa
 
 cassandra-snapshotter \
---s3-bucket-name="efset-cassandra-backups" \
---s3-bucket-region="eu-west-1" \
+--s3-bucket-region="$S3_REGION" \
+--s3-bucket-name="$S3_BUCKET" \
 --s3-base-path="$S3_BASE_PATH" \
 --aws-access-key-id="$AWS_ACCESS_KEY_ID" \
 --aws-secret-access-key="$AWS_SECRET_ACCESS_KEY" \
