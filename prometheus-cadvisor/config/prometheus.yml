@@ -37,3 +37,24 @@ scrape_configs:
         action: keep
       - source_labels: [__meta_ec2_availability_zone]
         target_label: az
+
+  - job_name: 'ec2_cassandra_services'
+    ec2_sd_configs:
+      - region: eu-west-1
+        port: 6264
+    relabel_configs:
+      - source_labels: [__meta_ec2_tag_category]
+        regex: CATEGORY_TAG_REGEX
+        target_label: category
+      - source_labels: [__meta_ec2_tag_environment]
+        regex: ENVIRONMENT_TAG_REGEX
+        target_label: environment
+      - source_labels: [__meta_ec2_tag_platform]
+        regex: PLATFORM_TAG_REGEX
+        action: keep
+        target_label: platform
+      - source_labels: [__meta_ec2_tag_environment]
+        regex: ENVIRONMENT_TAG_REGEX
+        action: keep
+      - source_labels: [__meta_ec2_availability_zone]
+        target_label: az
