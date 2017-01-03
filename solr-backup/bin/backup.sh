@@ -41,5 +41,5 @@ for f in `find /var/lib/solr/data/$CORE/data/ -type d -name "snapshot.*"`;
 do
   echo $f
   snapshot_file=$(echo $f | sed 's,/var/lib/solr/data/.*/data/,,g');
-  aws s3 sync $f/ s3://$S3_BASE_PATH/$prefix/$snapshot_file;
+  aws s3 sync $f/ s3://$S3_BASE_PATH/$prefix/$CORE/$snapshot_file;
 done
