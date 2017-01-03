@@ -29,6 +29,8 @@ if [ -z "$prefix" ]; then
    exit 1
 fi
 
+SOLR_HOST_IP=$(echo $SOLR_HOST | cut -d : -f1)
+
 curl -o - -s http://$SOLR_HOST/solr/$CORE/replication?command=backup&wt=json | jq '.'
 
 while ! curl -o - -s "http://$SOLR_HOST/solr/$CORE/replication?command=details&wt=json" | jq '.details.backup' | grep "success";
@@ -41,5 +43,5 @@ for f in `find /var/lib/solr/data/$CORE/data/ -type d -name "snapshot.*"`;
 do
   echo $f
   snapshot_file=$(echo $f | sed 's,/var/lib/solr/data/.*/data/,,g');
-  aws s3 sync $f/ s3://$S3_BASE_PATH/$prefix/$CORE/$snapshot_file;
+  aws s3 sync $f/ s3://$S3_BASE_PATH/$prefix/$CORE/$SOLR_HOST_IP_$snapshot_file;
 done
