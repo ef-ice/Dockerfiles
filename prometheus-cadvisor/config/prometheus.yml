@@ -46,15 +46,9 @@ scrape_configs:
       - source_labels: [__meta_ec2_tag_category]
         regex: CATEGORY_TAG_REGEX
         target_label: category
+        action: keep
       - source_labels: [__meta_ec2_tag_environment]
         regex: ENVIRONMENT_TAG_REGEX
         target_label: environment
-      - source_labels: [__meta_ec2_tag_platform]
-        regex: PLATFORM_TAG_REGEX
-        action: keep
-        target_label: platform
-      - source_labels: [__meta_ec2_tag_environment]
-        regex: ENVIRONMENT_TAG_REGEX
-        action: keep
       - source_labels: [__meta_ec2_availability_zone]
         target_label: az
