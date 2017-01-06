@@ -37,6 +37,8 @@ scrape_configs:
         action: keep
       - source_labels: [__meta_ec2_availability_zone]
         target_label: az
+      - source_labels: [__meta_ec2_public_ip]
+        target_label: public_ip
 
   - job_name: 'ec2_cassandra_services'
     ec2_sd_configs:
@@ -52,3 +54,5 @@ scrape_configs:
         target_label: environment
       - source_labels: [__meta_ec2_availability_zone]
         target_label: az
+      - source_labels: [__meta_ec2_public_ip]
+        target_label: public_ip
