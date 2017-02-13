@@ -2,7 +2,7 @@ default: build
 
 NAME=traefik-proxy
 REGISTRY=quay.io/vnadgir_ef/
-TAG=latest
+TAG=$(shell git parse-rev --short HEAD)
 
 build:
 	docker build -t $(NAME) .
