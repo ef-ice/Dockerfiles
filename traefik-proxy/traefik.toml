@@ -1,5 +1,5 @@
 [web]
-  address = ":8080"
+address = ":8080"
 
 [file]
 
