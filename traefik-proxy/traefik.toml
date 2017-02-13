@@ -1,0 +1,14 @@
+[file]
+
+# rules
+[backends]
+  [backends.backend1]
+    [backends.backend1.servers.server1]
+    url = "ws://SERVICE_IP:SERVICE_PORT"
+
+[frontends]
+  [frontends.frontend1]
+  backend = "backend1"
+  passHostHeader = true
+    [frontends.frontend1.routes.test_1]
+    rule = "Path:/ws/results"
