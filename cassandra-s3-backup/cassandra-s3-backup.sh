@@ -48,7 +48,7 @@ do
     echo ""
     echo "Sending all $table files one by one..."
     echo ""
-    readonly FILES=`find /var/lib/cassandra/data/$CASSANDRA_KEYSPACE/${table}/snapshots/$SNAPSHOTID -type f`
+    FILES=`find /var/lib/cassandra/data/$CASSANDRA_KEYSPACE/${table}/snapshots/$SNAPSHOTID -type f`
     for filename in $FILES
     do
 	     aws s3 cp "$filename" "$S3_PATH$filename"
