@@ -54,7 +54,7 @@ do
 	     aws s3 cp "$filename" "$S3_PATH$filename"
     done
 
-    rmdir -v /var/lib/cassandra/data/$CASSANDRA_KEYSPACE/${table}/snapshots/$SNAPSHOTID
+    rm -rf /var/lib/cassandra/data/$CASSANDRA_KEYSPACE/${table}/snapshots/$SNAPSHOTID
 done
 
 echo "DONE!"
