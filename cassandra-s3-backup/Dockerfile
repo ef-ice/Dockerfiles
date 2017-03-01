@@ -1,6 +1,7 @@
 FROM alpine:3.5
 
-RUN apk add --no-cache --upgrade bash python-dev gcc build-base curl util-linux
+RUN apk add --no-cache --upgrade bash python-dev gcc \
+build-base curl util-linux openjdk8-jre-base
 
 WORKDIR /opt
 
