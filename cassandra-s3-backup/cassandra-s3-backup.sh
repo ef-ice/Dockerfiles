@@ -33,6 +33,12 @@ if [ -z "$CASSANDRA_KEYSPACE" ]; then
    exit 1
 fi
 
+if [ -z "$MAX_CONCURRENT_REQUESTS" ]; then
+   echo "Missing MAX_CONCURRENT_REQUESTS environment variable, using default of 10"
+else
+  aws configure set default.s3.max_concurrent_requests $MAX_CONCURRENT_REQUESTS
+fi
+
 readonly DATE=`date +"%Y-%m-%d-%H-%M-%S"`
 readonly SNAPSHOTID=`uuidgen --time`
 readonly S3_PATH="$S3_BUCKET/$S3_BUCKET_PATH/$DATE/`cat /etc/hostname`"
@@ -41,6 +47,7 @@ echo "------ NEW RUN ------"
 echo "Taking Cassandra snapshot for $DATE with id=$SNAPSHOTID"
 
 nodetool snapshot --tag $SNAPSHOTID $CASSANDRA_KEYSPACE
+
 
 readonly TABLES=`ls /var/lib/cassandra/data/$CASSANDRA_KEYSPACE`
 for table in $TABLES
