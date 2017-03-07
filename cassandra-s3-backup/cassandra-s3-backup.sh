@@ -39,15 +39,16 @@ else
   aws configure set default.s3.max_concurrent_requests $MAX_CONCURRENT_REQUESTS
 fi
 
-readonly DATE=`date +"%Y-%m-%d-%H-%M-%S"`
+readonly YEAR=`date +"%Y"`
+readonly MONTH=`date +"%m"`
+readonly DATE=`date +"%d-%H-%M-%S"`
 readonly SNAPSHOTID=`uuidgen --time`
-readonly S3_PATH="$S3_BUCKET/$S3_BUCKET_PATH/$DATE/`cat /etc/hostname`"
+readonly S3_PATH="$S3_BUCKET/$S3_BUCKET_PATH/$YEAR/$MONTH/$DATE/`cat /etc/hostname`"
 
 echo "------ NEW RUN ------"
-echo "Taking Cassandra snapshot for $DATE with id=$SNAPSHOTID"
+echo "Taking Cassandra snapshot for $YEAR-$MONTH-$DATE with id=$SNAPSHOTID"
 
 nodetool snapshot --tag $SNAPSHOTID $CASSANDRA_KEYSPACE
-
 
 readonly TABLES=`ls /var/lib/cassandra/data/$CASSANDRA_KEYSPACE`
 for table in $TABLES
