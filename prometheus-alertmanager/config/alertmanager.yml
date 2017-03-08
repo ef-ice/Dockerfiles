@@ -10,3 +10,4 @@ receivers:
     slack_configs:
       - api_url: 'SLACK_API_URL'
         channel: 'SLACK_CHANNEL'
+        send_resolved: true
