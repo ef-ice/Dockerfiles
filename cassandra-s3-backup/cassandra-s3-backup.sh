@@ -13,8 +13,8 @@ if [ -z "$AWS_SECRET_ACCESS_KEY" ]; then
    exit 1
 fi
 
-if [ -z "$AWS_REGION" ]; then
-   echo "Missing AWS_REGION environment variable"
+if [ -z "$AWS_DEFAULT_REGION" ]; then
+   echo "Missing AWS_DEFAULT_REGION environment variable"
    exit 1
 fi
 
