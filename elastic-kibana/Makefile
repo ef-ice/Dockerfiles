@@ -8,12 +8,12 @@ VERSION=4.6.4
 build:
 	docker build -t $(NAME) .
 
-push:
-    docker tag $(NAME) $(REGISTRY)$(NAME):$(VERSION)
-	docker push $(REGISTRY)$(NAME):$(VERSION)
-
 clean:
 	docker build --no-cache -t $(NAME) .
+
+push:
+	docker tag $(NAME) $(REGISTRY)$(NAME):$(VERSION)
+	docker push $(REGISTRY)$(NAME):$(VERSION)
 
 push_china:
 	echo "Using version .... $(VERSION)"
