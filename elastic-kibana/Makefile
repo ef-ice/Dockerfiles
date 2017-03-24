@@ -19,3 +19,9 @@ push_china:
 	echo "Using version .... $(VERSION)"
 	docker tag $(NAME) $(CN_REGISTRY)$(NAME):$(VERSION)
 	docker push $(CN_REGISTRY)$(NAME):$(VERSION)
+
+version:
+	echo "$(VERSION)"
+
+
+
