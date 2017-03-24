@@ -1,7 +1,7 @@
 # Alert for any instance that has CPU usage of more than 85% for more than 30 mins
 ALERT HighCpuUsage
-  IF irate(node_cpu{mode="idle"}[10m]) < 0.15
-  FOR 5m
+  IF rate(node_cpu{mode="idle"}[5m]) < 0.15
+  FOR 10m
   LABELS {
     severity="page"
   }
