@@ -1,4 +1,4 @@
-FROM alpine:3.4
+FROM alpine:3.5
 
 ENV LOGSTASH_VERSION=2.4.0
 ENV LOGSTASH_DATA=/var/services/data/logstash/
@@ -38,8 +38,8 @@ EXPOSE 5044
 EXPOSE 31311
 
 # Healthcheck - Docker 1.12
-HEALTHCHECK --interval=5s --timeout=3s --retries=10 CMD \
-curl "$(hostname):31311" || exit 1
+HEALTHCHECK --interval=1m --timeout=1m --retries=3 CMD \
+curl --fail "$(hostname):31311" || exit 1
 
 ENTRYPOINT ["docker-entrypoint.sh"]
-CMD []
+CMD [""]
