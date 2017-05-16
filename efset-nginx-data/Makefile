@@ -3,7 +3,7 @@ default: build
 NAME=efset-nginx-data
 REGISTRY=quay.io/vnadgir_ef/
 CN_REGISTRY=registry-mirror.internal.efset.cn/efset/
-VERSION=$(shell git rev-parse HEAD)
+VERSION=$(shell git rev-parse --short HEAD)
 
 build:
 	docker build -t $(NAME) .
