@@ -1,5 +1,5 @@
 ALERT DiskUsageIsAboveDefinedThreshold
-  IF node_filesystem_free / node_filesystem_size < 0.15
+  IF node_filesystem_free / node_filesystem_size < 0.05
   FOR 30m
   LABELS {
     severity="page"

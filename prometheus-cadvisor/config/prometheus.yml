@@ -5,10 +5,8 @@ global:
   evaluation_interval: 10s
 
 rule_files:
-  - rules/cpu.rule
   - rules/disk.rule
   - rules/instance.rule
-  - rules/memory.rule
 
 scrape_configs:
   - job_name: 'prometheus'
