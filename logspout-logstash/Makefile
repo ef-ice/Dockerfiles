@@ -2,7 +2,7 @@ default: build
 
 NAME=logspout-logstash
 REGISTRY_EU=quay.io/vnadgir_ef/
-REGISTRY_CN=registry-mirror.internal.efset.cn/efset/
+REGISTRY_CN=registry-mirror.efset.cn/efset/
 VERSION=latest
 
 build:
