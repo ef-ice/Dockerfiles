@@ -34,11 +34,8 @@ RUN mkdir -p $LOGSTASH_DATA $LOGSTASH_LOG
 COPY *.conf /logstash/config/
 COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
 
-# UDP port
+# TCP/UDP port
 EXPOSE 5000
-
-# Filebeat port
-EXPOSE 5044
 
 # HTTP port
 EXPOSE 31311
