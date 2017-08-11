@@ -1,3 +1,4 @@
 User-agent: *
 Disallow: /
 Allow: /score
+Allow: /efset-img/
