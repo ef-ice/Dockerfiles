@@ -1,5 +1,5 @@
 User-agent: *
 Disallow: /
 Allow: /score
-Allow: /efset-img/
+Allow: /efset-widget/img/
 Allow: /efset-media-assets/
