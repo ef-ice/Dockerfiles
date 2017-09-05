@@ -8,3 +8,4 @@ RUN /opt/kibana/bin/kibana plugin --install elastic/sense
 RUN chown -R kibana:kibana /opt/kibana
 
 ENV NODE_OPTIONS="--max-old-space-size=512"
+COPY docker-entrypoint.sh /
