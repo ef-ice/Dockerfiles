@@ -1,6 +1,6 @@
-# Alert for any instance that has Memory usage of more than 85% for more than 30 mins
+# Alert for any instance that has Memory usage of more than 90% for more than 30 mins
 ALERT NodeHighMemoryUsage
-  IF (node_memory_MemAvailable or (node_memory_MemFree + node_memory_Buffers + node_memory_Cached)) / node_memory_MemTotal < 0.15
+  IF (node_memory_MemAvailable or (node_memory_MemFree + node_memory_Buffers + node_memory_Cached)) / node_memory_MemTotal < 0.10
   FOR 30m
   LABELS {
     severity="page"
