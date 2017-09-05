@@ -1,13 +1,22 @@
 global:
-  slack_api_url: "SLACK_API_URL"
-route:
-  group_wait: 10s
-  group_interval: 10s
-  repeat_interval: 5m
-  receiver: Prometheus_Alertmanager
-receivers:
-  - name: Prometheus_Alertmanager
-    slack_configs:
-      - api_url: 'SLACK_API_URL'
-        channel: 'SLACK_CHANNEL'
-        send_resolved: true
+
+# Whether or not to notify about resolved alerts.
+[ send_resolved: true ]
+
+# The endpoint to send HTTP POST requests to.
+url: TEAMS_WEB_HOOK
+
+
+#  slack_api_url: "SLACK_API_URL"
+#route:
+#  group_wait: 10s
+#  group_interval: 10s
+#  repeat_interval: 5m
+#  receiver: Prometheus_Alertmanager
+#receivers:
+#  - name: Prometheus_Alertmanager
+#    slack_configs:
+#      - api_url: 'SLACK_API_URL'
+#        channel: 'SLACK_CHANNEL'
+#        send_resolved: true
+
