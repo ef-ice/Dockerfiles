@@ -4,7 +4,7 @@ global:
 [ send_resolved: true ]
 
 # The endpoint to send HTTP POST requests to.
-url: TEAMS_WEB_HOOK
+url: 'TEAMS_WEB_HOOK'
 
 
 #  slack_api_url: "SLACK_API_URL"
