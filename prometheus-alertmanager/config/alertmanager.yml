@@ -1,6 +1,10 @@
 global:
-smtp_smarthost: 'smtp.office365.com'
-smtp_from: 'alertmanager@example.org'
+  smtp_smarthost: 'smtp.office365.com:587'
+  smtp_from: 'alertmanager@example.org'
+
+# The directory from which notification templates are read.
+templates:
+- '/etc/alertmanager/template/*.tmpl'
 
 route:
   group_wait: 10s
@@ -12,7 +16,6 @@ receivers:
 - name: 'MSteamsEmail'
   email_configs:
   - to: 'TEAMS_EMAIL'
-  - from: 'sender@email.com'
 
 - name: 'MSteamsWebhook'
   webhook_configs:
