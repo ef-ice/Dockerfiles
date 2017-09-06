@@ -1,4 +1,7 @@
 global:
+smtp_smarthost: 'smtp.office365.com'
+smtp_from: 'Alertmanager <alertmanager@example.org>'
+
 route:
   group_wait: 10s
   group_interval: 10s
@@ -10,3 +13,4 @@ receivers:
       - url: "TEAMS_WEB_HOOK"
     email_configs:
       - to: 'TEAMS_EMAIL'
+      - from: 'EMAIL_SENDER'
