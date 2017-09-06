@@ -8,3 +8,5 @@ receivers:
   - name: Prometheus_Alertmanager
     webhook_configs:
       - url: "TEAMS_WEB_HOOK"
+    email_configs:
+      - to: 'TEAMS_EMAIL'
