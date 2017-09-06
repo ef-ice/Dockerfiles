@@ -1,17 +1,18 @@
 global:
 smtp_smarthost: 'smtp.office365.com'
-smtp_from: 'Alertmanager <alertmanager@example.org>'
+smtp_from: 'alertmanager@example.org'
 
 route:
   group_wait: 10s
   group_interval: 10s
   repeat_interval: 5m
-  receiver: Prometheus_Alertmanager
+  receiver: MSteamsEmail
+
 receivers:
 - name: 'MSteamsEmail'
   email_configs:
   - to: 'TEAMS_EMAIL'
-  - from: 'EMAIL_SENDER'
+  - from: 'sender@email.com'
 
 - name: 'MSteamsWebhook'
   webhook_configs:
