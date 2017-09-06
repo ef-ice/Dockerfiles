@@ -8,11 +8,11 @@ route:
   repeat_interval: 5m
   receiver: Prometheus_Alertmanager
 receivers:
-  - name: 'MSteamsWebhook'
-    webhook_configs:
-      - url: "TEAMS_WEB_HOOK"
+- name: 'MSteamsEmail'
+  email_configs:
+  - to: 'TEAMS_EMAIL'
+  - from: 'EMAIL_SENDER'
 
-  - name: 'MSteamsEmail'
-    email_configs:
-      - to: 'TEAMS_EMAIL'
-      - from: 'EMAIL_SENDER'
+- name: 'MSteamsWebhook'
+  webhook_configs:
+  - url: "TEAMS_WEB_HOOK"
