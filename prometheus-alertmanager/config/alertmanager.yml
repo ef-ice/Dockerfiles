@@ -1,6 +1,6 @@
 global:
-  smtp_smarthost: 'smtp.office365.com:587'
-  smtp_from: 'alertmanager@example.org'
+  smtp_smarthost: 'smtp.gmail.com:587'
+  smtp_from: 'alertmanager@prometheus.efset.org'
 
 # The directory from which notification templates are read.
 templates:
