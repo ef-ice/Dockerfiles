@@ -3,4 +3,4 @@ Disallow: /
 Allow: /score
 Allow: /efset-widget/img/
 Allow: /efset-media-assets/
-Allow: /athena/read-certificate/og/
+Allow: /cert
