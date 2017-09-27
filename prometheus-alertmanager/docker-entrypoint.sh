@@ -26,7 +26,7 @@ fi
 
 sed -i s,TEAMS_WEB_HOOK,$TEAMS_WEB_HOOK,g /etc/alertmanager/alertmanager.yml
 sed -i s,TEAMS_EMAIL,$TEAMS_EMAIL,g /etc/alertmanager/alertmanager.yml
-sed -i s,EMAIL_ACCOUNT,EMAIL_ACCOUNT,g /etc/alertmanager/alertmanager.yml
-sed -i s,EMAIL_AUTH_TOKEN,EMAIL_AUTH_TOKEN,g /etc/alertmanager/alertmanager.yml
+sed -i s,EMAIL_ACCOUNT,$EMAIL_ACCOUNT,g /etc/alertmanager/alertmanager.yml
+sed -i s,EMAIL_AUTH_TOKEN,$EMAIL_AUTH_TOKEN,g /etc/alertmanager/alertmanager.yml
 
 /bin/alertmanager "$@"

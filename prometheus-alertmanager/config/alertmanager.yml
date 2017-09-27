@@ -16,9 +16,9 @@ receivers:
   - to: 'TEAMS_EMAIL'
     from: 'alertmanager@prometheus.efset.org'
     smarthost: smtp.gmail.com:587
-    auth_username: 'EMAIL_ACCOUNT'
-    auth_identity: 'EMAIL_ACCOUNT'
-    auth_password: 'EMAIL_AUTH_TOKEN'
+    auth_username: "EMAIL_ACCOUNT"
+    auth_identity: "EMAIL_ACCOUNT"
+    auth_password: "EMAIL_AUTH_TOKEN"
 
 - name: 'MSteamsWebhook'
   webhook_configs:
