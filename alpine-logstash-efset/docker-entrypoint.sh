@@ -12,7 +12,7 @@ cat /logstash/config/logstash.conf
 
 # If there are any arguments then we want to run those instead
 if [[ "$1" == "-"* || -z $1 ]]; then
-  exec /logstash/bin/logstash agent -f /logstash/config/logstash.conf "$@"
+  exec /logstash/bin/logstash agent -f /logstash/config/logstash.conf "$@" --debug
 else
-  exec "$@"
+  exec "$@" --debug
 fi
