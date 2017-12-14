@@ -7,7 +7,7 @@ templates:
 route:
   group_wait: 10s
   group_interval: 10s
-  repeat_interval: 1m
+  repeat_interval: 10m
   receiver: MSteamsEmail
 
 receivers:
