@@ -5,7 +5,6 @@ ENV LOGSTASH_DATA=/var/services/data/logstash/
 ENV LOGSTASH_LOG=/var/services/log/
 ENV LOGSTASH_LOG_LEVEL=INFO
 ENV LOGSTASH_URL=https://download.elastic.co/logstash/logstash/logstash-$LOGSTASH_VERSION.tar.gz
-ENV GEO_LITE_CITY_DAT="http://geolite.maxmind.com/download/geoip/database/GeoLiteCity.dat.gz"
 
 # Install required libs
 RUN apk add --update --no-cache bash curl ca-certificates openjdk8-jre-base
@@ -18,8 +17,7 @@ mv /logstash-$LOGSTASH_VERSION /logstash && \
 rm $(find /logstash | egrep "\.(exe|bat|txt|textile)")
 
 # Setup geoip
-RUN mkdir -p /etc/geoip/ && \
-curl -sSL "$GEO_LITE_CITY_DAT" | gunzip > /etc/geoip/GeoLiteCity.dat
+COPY GeoLiteCity.dat /etc/geoip/GeoLiteCity.dat
 
 # Install plugins
 RUN /logstash/bin/logstash-plugin install logstash-input-beats \
