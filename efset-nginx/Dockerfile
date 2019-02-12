@@ -5,9 +5,6 @@ COPY bin/install_node_dependencies.sh /usr/local/bin/install_node_dependencies.s
 ENV NODE_VERSION=v4.5.0
 WORKDIR /var/www
 
-COPY nginx/GeoIP.dat /etc/geoip/GeoIP.dat
-COPY nginx/GeoLiteCity.dat /etc/geoip/GeoLiteCity.dat
-
 RUN apt-get update && \
   apt-get install -y curl git jq python && \
   mkdir -p /etc/nginx/conf /etc/nginx/logs && \
